@@ -1,2 +1,3 @@
 New Line
 New Line from hometask_1
+New Line from branch_for_merge
