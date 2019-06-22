@@ -1,1 +1,2 @@
 New Line
+New Line from branch_for_merge
