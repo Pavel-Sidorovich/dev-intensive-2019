@@ -1,1 +1,2 @@
-h1 DEV-Intensive по Android-разработке на Kotlin от skill-branch.ru
+h1 DEV-Intensive on Android-development on Kotlin from skill-branch.ru
+======================================================================
