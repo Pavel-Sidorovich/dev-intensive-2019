@@ -2,18 +2,18 @@ package ru.skillbranch.devintensive.utils
 
 
 object Utils {
-    fun parseFullName(fullName:String?):Pair<String?, String?>{
-        if(fullName == "" || fullName == " " || fullName == null)
+    fun parseFullName(fullName: String?): Pair<String?, String?> {
+        if (fullName == "" || fullName == " " || fullName == null)
             return null to null
-        val parts : List<String> = fullName.split(" ")
+        val parts: List<String> = fullName.split(" ")
         var firstName: String? = null
         var lastName: String? = null
         var key = false
-        for(item in parts){
-            if(!key && item != "" && item != " "){
+        for (item in parts) {
+            if (!key && item != "" && item != " ") {
                 firstName = item
                 key = true
-            } else if(key && item != "" && item != " "){
+            } else if (key && item != "" && item != " ") {
                 lastName = item
                 return firstName to lastName
             }
@@ -26,10 +26,12 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        if(firstName != null && firstName != "" && firstName != " " ) {
+        if (firstName != null && firstName != "" && firstName != " ") {
             if (lastName != null && lastName != "" && lastName != " ")
                 return firstName[0].toUpperCase() + "" + lastName[0].toUpperCase()
             return firstName[0].toUpperCase() + ""
+        } else if (lastName != null && lastName != "" && lastName != " ") {
+            return lastName[0].toUpperCase() + ""
         } else return null
     }
 
