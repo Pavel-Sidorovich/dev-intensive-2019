@@ -112,4 +112,5 @@ object Utils {
 
         return lat //Return latinized string
     }
+
 }
