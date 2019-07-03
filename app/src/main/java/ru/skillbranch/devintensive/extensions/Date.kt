@@ -34,11 +34,11 @@ fun Date.humanizeDiff(date: Date = Date()): String {
             in 0L * SECOND..1L * SECOND -> "только что"
             in 1L * SECOND..45L * SECOND -> "несколько секунд назад"
             in 45L * SECOND..75L * SECOND -> "минуту назад"
-            in 75L * SECOND..45L * MINUTE -> "${different / MINUTE} ${getNumForm("минуту;минуты;минут" , different / MINUTE)} назад"
+            in 75L * SECOND..45L * MINUTE -> "${TimeUnits.MINUTE.plural(different / MINUTE)} назад"//"${different / MINUTE} ${getNumForm("минуту;минуты;минут" , different / MINUTE)} назад"
             in 45L * MINUTE..75L * MINUTE -> "час назад"
-            in 75L * MINUTE..22L * HOUR -> "${different / HOUR} ${getNumForm("час;часа;часов" , different / HOUR)} назад"
+            in 75L * MINUTE..22L * HOUR -> "${TimeUnits.HOUR.plural(different / HOUR)} назад"//"${different / HOUR} ${getNumForm("час;часа;часов" , different / HOUR)} назад"
             in 22L * HOUR..26L * HOUR -> "день назад"
-            in 26L * HOUR..360L * DAY -> "${different / DAY} ${getNumForm("день;дня;дней" , different / DAY)} назад"
+            in 26L * HOUR..360L * DAY -> "${TimeUnits.DAY.plural(different / DAY)} назад"//"${different / DAY} ${getNumForm("день;дня;дней" , different / DAY)} назад"
             else -> "более года назад"
         }
     } else {
@@ -46,11 +46,11 @@ fun Date.humanizeDiff(date: Date = Date()): String {
             in 0L * SECOND..1L * SECOND -> "только что"
             in 1L * SECOND..45L * SECOND -> "через несколько секунд"
             in 45L * SECOND..75L * SECOND -> "через минуту"
-            in 75L * SECOND..45L * MINUTE -> "через ${absDifferent / MINUTE} ${getNumForm("минуту;минуты;минут" , absDifferent / MINUTE)}"
+            in 75L * SECOND..45L * MINUTE -> "через ${TimeUnits.MINUTE.plural(absDifferent / MINUTE)}"//${absDifferent / MINUTE} ${getNumForm("минуту;минуты;минут" , absDifferent / MINUTE)}"
             in 45L * MINUTE..75L * MINUTE -> "через час"
-            in 75L * MINUTE..22L * HOUR -> "через ${absDifferent / HOUR} ${getNumForm("час;часа;часов" , absDifferent / HOUR)}"
+            in 75L * MINUTE..22L * HOUR -> "через ${TimeUnits.HOUR.plural(absDifferent / HOUR)}"//${absDifferent / HOUR} ${getNumForm("час;часа;часов" , absDifferent / HOUR)}"
             in 22L * HOUR..26L * HOUR -> "через день"
-            in 26L * HOUR..360L * DAY -> "через ${absDifferent / DAY} ${getNumForm("день;дня;дней" , absDifferent / DAY)}"
+            in 26L * HOUR..360L * DAY -> "через ${TimeUnits.DAY.plural(absDifferent / DAY)}"//${absDifferent / DAY} ${getNumForm("день;дня;дней" , absDifferent / DAY)}"
             else -> "более чем через год"
         }
     }
@@ -68,104 +68,26 @@ private fun getNumForm(pluralForms:String , value: Long):String {
     return forms[2]
 }
 
-//fun Date.humanizeDiff(date: Date = Date()): String {
-////    TODO("not implemented")
-//    var diff: Long = date.time.minus(this.time)
-//    val days = abs(diff / DAY)
-//    val hours = abs(diff / HOUR)
-//    val minutes = abs(diff / MINUTE)
-//    val seconds = abs(diff / SECOND)
-//
-//    if (diff > 0) {
-//        return when (days) {
-//            0L, 1L -> {
-//                when (hours) {
-//                    0L, 1L -> {
-//                        when (minutes) {
-//                            0L, 1L -> {
-//                                when (seconds) {
-//                                    0L, 1L -> "только что"
-//                                    in 2L..45L -> "несколько секунд назад"
-//                                    in 46L..75L -> "минуту назад"
-//                                    else -> "1 минуту назад"
-//                                }
-//                            }
-//                            21L, 31L, 41L, 51L -> "$minutes минуту назад"
-//                            in 2L..4L, in 22..24, in 32..34, in 42..44 -> "$minutes минуты назад"
-//                            in 46L..75L -> "час назад"
-//                            in 75L..119L -> "1 час назад"
-//                            else -> "$minutes минут назад"
-//                        }
-//                    }
-//                    21L -> "$hours час назад"
-//                    in 2L..4L, 22L -> "$hours часа назад"
-//                    in 23L..26L -> "день назад"
-//                    in 27L..49L -> "1 день назад"
-//                    else -> "$hours часов назад"
-//                }
-//            }
-//            in 5L..20L -> "$days дней назад"
-//            in 361L..Long.MAX_VALUE -> "более года назад"
-//            else -> {
-//                when (days % 100) {
-//                    11L -> "$days дней назад"
-//                    else ->
-//                        when (days % 10) {
-//                            1L -> "$days день назад"
-//                            in 2L..4L -> "$days дня назад"
-//                            else -> "$days дней назад"
-//                        }
-//                }
-//            }
-//        }
-//    } else {
-//        return when (days) {
-//            0L, 1L -> {
-//                when (hours) {
-//                    0L, 1L -> {
-//                        when (minutes) {
-//                            0L, 1L -> {
-//                                when (seconds) {
-//                                    0L, 1L -> "только что"
-//                                    in 2L..45L -> "через несколько секунд"
-//                                    in 46L..75L -> "через минуту"
-//                                    else -> "через 1 минуту"
-//                                }
-//                            }
-//                            21L, 31L, 41L, 51L -> "через $minutes минуту"
-//                            in 2L..4L, in 22..24, in 32..34, in 42..44 -> "через $minutes минуты"
-//                            in 46L..75L -> "через час"
-//                            in 75L..119L -> "через 1 час"
-//                            else -> "через $minutes минут"
-//                        }
-//                    }
-//                    21L -> "через $hours час"
-//                    in 2L..4L, 22L -> "через $hours часа"
-//                    in 23L..26L -> "через день"
-//                    in 27L..49L -> "через 1 день"
-//                    else -> "через $hours часов"
-//                }
-//            }
-//            in 5L..20L -> "через $days дней"
-//            in 361L..Long.MAX_VALUE -> "более чем через год"
-//            else -> {
-//                when (days % 100) {
-//                    11L -> "через $days дней"
-//                    else ->
-//                        when (days % 10) {
-//                            1L -> "через $days день"
-//                            in 2L..4L -> "через $days дня"
-//                            else -> "через $days дней"
-//                        }
-//                }
-//            }
-//        }
-//    }
-//}
-
 enum class TimeUnits {
     SECOND,
     MINUTE,
     HOUR,
     DAY
+}
+
+fun TimeUnits.plural(value: Long): String? {
+    val forms = when(this){
+        TimeUnits.SECOND -> "секунду;секунды;секунд".split(";")
+        TimeUnits.MINUTE -> "минуту;минуты;минут".split(";")
+        TimeUnits.HOUR -> "час;часа;часов".split(";")
+        TimeUnits.DAY -> "день;дня;дней".split(";")
+    }
+    when (value % 10) {
+        1L -> if (value % 100L != 11L)
+            return "$value ${forms[0]}"
+        2L, 3L, 4L -> return if (value % 100 !in 12..14)
+            "$value ${forms[1]}"
+        else "$value ${forms[2]}"
+    }
+    return "$value ${forms[2]}"
 }
