@@ -12,6 +12,8 @@ fun String.truncate(count: Int = 17): String{
 
 fun String.stripHtml(): String{
     return this.replace("<[^<>]+>".toRegex(),"")    //Remove html tags
-    .replace("[&'\"><}]".toRegex(), "")      //Remove html escape sequences such as & <> '"
+//        .replace("\\n".toRegex(), "")
+    .replace("&[\\S]+;".toRegex(),"")           //Remove html escape sequences
+    .replace("[\\n&'\"><}]".toRegex(), "")      //Remove & <> '" \n
     .replace(" +".toRegex(), " ")            //Remove duplicate spaces
 }
