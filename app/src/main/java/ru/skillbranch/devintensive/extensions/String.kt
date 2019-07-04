@@ -1,9 +1,10 @@
 package ru.skillbranch.devintensive.extensions
 
-fun String.truncate(count: Int = 17): String{
-    var result: String = this.trimEnd()
-    if(result.length > count) {
-        result = result.substring(0, count)
+fun String.truncate(count: Int = 16): String{
+    var result: String = this.trim()
+    val newCount = count + 1
+    if(result.length > newCount) {
+        result = result.substring(0, newCount)
 
         result = result.trimEnd().plus("...")
     }
