@@ -22,25 +22,26 @@ object Utils {
     }
 
     fun transliteration(payload: String, divider: String = " "): String {
-        return convertRU(payload.replace(" ", divider))
+        return convertRU(payload.trim().replace(" ", divider))
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
         if (firstName != null && firstName != "" && firstName != " ") {
-            if (lastName != null && lastName != "" && lastName != " ")
+            val firstName = firstName.trim()
+            if (lastName != null && lastName != "" && lastName != " ") {
+                val lastName = lastName.trim()
                 return firstName[0].toUpperCase() + "" + lastName[0].toUpperCase()
+            }
             return firstName[0].toUpperCase() + ""
         } else if (lastName != null && lastName != "" && lastName != " ") {
+            val lastName = lastName.trim()
             return lastName[0].toUpperCase() + ""
         } else return null
     }
 
     private fun convertRU(cyr: String): String {
-
-        var lat: String
-
         //Lower case letters
-        lat = cyr.replace("а".toRegex(), "a")
+        var lat = cyr.replace("а".toRegex(), "a")
         lat = lat.replace("б".toRegex(), "b")
         lat = lat.replace("в".toRegex(), "v")
         lat = lat.replace("г".toRegex(), "g")
@@ -85,7 +86,7 @@ object Utils {
         lat = lat.replace("Ж".toRegex(), "Zh")
         lat = lat.replace("З".toRegex(), "Z")
         lat = lat.replace("И".toRegex(), "I")
-        lat = lat.replace("Л".toRegex(), "I")
+        lat = lat.replace("Й".toRegex(), "I")
         lat = lat.replace("К".toRegex(), "K")
         lat = lat.replace("Л".toRegex(), "L")
         lat = lat.replace("М".toRegex(), "M")

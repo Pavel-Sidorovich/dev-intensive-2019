@@ -1,3 +1,11 @@
 <resources>
+    <!-- DEFAULT STRINGS -->
     <string name="app_name">Dev-intensive</string>
+
+    <!-- MY STRINGS -->
+    <string name="error_message_network">Network error</string>
+    <string name="error_message_call">Call failed</string>
+    <string name="error_message_map">Map loading failed</string>
+    <string name="centerimage">Сenter Image</string>
+    <string name="bender">bender</string>
 </resources>

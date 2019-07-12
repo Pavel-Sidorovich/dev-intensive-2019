@@ -56,52 +56,12 @@ fun Date.humanizeDiff(date: Date = Date()): String {
     }
 }
 
-//enum class TimeUnits {
-//    SECOND,
-//    MINUTE,
-//    HOUR,
-//    DAY
-//}
-
 enum class TimeUnits {
 
-    SECOND
-//    {
-//        override fun plural(number: Int): String {
-//            return this.pluralFun(number)
-//            //return formatSeconds(number.toLong())
-//        }
-//    }
-    ,
-
-    MINUTE
-//    {
-//        override fun plural(number: Int): String {
-//            return this.pluralFun(number)
-//            //return formatMinutes(number.toLong())
-//        }
-//    }
-    ,
-
-    HOUR
-//    {
-//        override fun plural(number: Int): String {
-//            return this.pluralFun(number)
-//            //return formatHours(number.toLong())
-//        }
-//    }
-    ,
-
-    DAY
-//    {
-//        override fun plural(number: Int): String {
-//            return this.pluralFun(number)
-//            //return formatDays(number.toLong())
-//        }
-//    }
-    ;
-
-//    abstract fun plural(number: Int): String
+    SECOND,
+    MINUTE,
+    HOUR,
+    DAY;
 
     fun plural(valueInt: Int): String {
         val forms = when(this){
@@ -122,23 +82,3 @@ enum class TimeUnits {
     }
 
 }
-
-
-
-//fun TimeUnits.pluralFun(valueInt: Int): String {
-//    val forms = when(this){
-//        TimeUnits.SECOND -> "секунду;секунды;секунд".split(";")
-//        TimeUnits.MINUTE -> "минуту;минуты;минут".split(";")
-//        TimeUnits.HOUR -> "час;часа;часов".split(";")
-//        TimeUnits.DAY -> "день;дня;дней".split(";")
-//    }
-//    val value = valueInt.toLong()
-//    when (value % 10) {
-//        1L -> if (value % 100L != 11L)
-//            return "$value ${forms[0]}"
-//        2L, 3L, 4L -> return if (value % 100 !in 12..14)
-//            "$value ${forms[1]}"
-//        else "$value ${forms[2]}"
-//    }
-//    return "$value ${forms[2]}"
-//}
