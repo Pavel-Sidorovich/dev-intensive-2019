@@ -45,7 +45,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NAME("Как меня зовут?", listOf("Бендер", "Bender")) {
             override fun nextQuestion(): Question = PROFESSION
             override fun check(answer: String): String {
-                return if (Regex(pattern = "[A-ZА-Я]+.").containsMatchIn(input = answer)) {
+                return if (answer[0] == answer[0].toUpperCase()) {
                     "null"
                 } else
                     "Имя должно начинаться с заглавной буквы"
@@ -54,7 +54,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
             override fun nextQuestion(): Question = MATERIAL
             override fun check(answer: String): String {
-                return if (Regex(pattern = "[a-zа-я]+.").containsMatchIn(input = answer)) {
+                return if (answer[0] == answer[0].toLowerCase()) {
                     "null"
                 } else
                     "Профессия должна начинаться со строчной буквы"
@@ -63,7 +63,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "metal", "iron", "wood")) {
             override fun nextQuestion(): Question = BDAY
             override fun check(answer: String): String {
-                return if (Regex(pattern = "\\D+").containsMatchIn(input = answer)) {
+                return if (Regex("\\D+").find(answer)?.value == answer) {
                     "null"
                 } else
                     "Материал не должен содержать цифр"
@@ -72,7 +72,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         BDAY("Когда меня создали?", listOf("2993")) {
             override fun nextQuestion(): Question = SERIAL
             override fun check(answer: String): String {
-                return if (Regex(pattern = "\\d+").containsMatchIn(input = answer)) {
+                return if (Regex("\\d+").find(answer)?.value == answer ) {
                     "null"
                 } else
                     "Год моего рождения должен содержать только цифры"
@@ -81,7 +81,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         SERIAL("Мой серийный номер?", listOf("2716057")) {
             override fun nextQuestion(): Question = IDLE
             override fun check(answer: String): String {
-                return if (Regex(pattern = "\\d{7}").containsMatchIn(input = answer)) {
+                return if (Regex("\\d{7}").find(answer)?.value == answer ) {
                     "null"
                 } else
                     "Серийный номер содержит только цифры, и их 7"
@@ -90,7 +90,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         IDLE("На этом все, вопросов больше нет", listOf()) {
             override fun nextQuestion(): Question = IDLE
             override fun check(answer: String): String {
-                return "null"
+                return ""
             }
         };
 

@@ -13,15 +13,12 @@ data class User (
     var lastVisit: Date? = Date(),
     var isOnline: Boolean = false
 ){
-    var introBit : String
+    private var introBit : String
 
     constructor(id: String, firstName: String?, lastName: String?) : this(id, firstName, lastName, null)
 
     init {
         introBit = getIntro()
-//        println("It's Alive!!! \n" +
-//                "${if(lastName === "Doe") "His name id $firstName $lastName" else "And his name is $firstName $lastName!!!"}\n" +
-//        "${getIntro()}")
     }
 
     private fun getIntro() = "$firstName $lastName"
