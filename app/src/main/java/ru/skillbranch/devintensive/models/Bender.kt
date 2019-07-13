@@ -16,9 +16,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         if (temp == "null") {
             if (question.answers.contains(answer)) {
                 question = question.nextQuestion()
-                return if(question == Question.IDLE){
-                    "\n${question.question}" to status.color
-                } else "Отлично - ты справился\n${question.question}" to status.color
+                return "Отлично - ты справился\n${question.question}" to status.color
             } else {
                 if (status == Status.CRITICAL) {
                     status = status.nextStatus()
@@ -27,7 +25,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                     status = status.nextStatus()
                 return "Это неправильный ответ\n${question.question}" to status.color
             }
-        } else return "$temp\n${question.question}" to status.color
+        } else return "$temp${question.question}" to status.color
     }
 
     enum class Status(val color: Triple<Int, Int, Int>) {
@@ -47,19 +45,19 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NAME("Как меня зовут?", listOf("Бендер", "Bender")) {
             override fun nextQuestion(): Question = PROFESSION
             override fun check(answer: String): String {
-                return if (answer[0] == answer[0].toUpperCase()) {
+                return if (answer[0] != answer[0].toLowerCase()) {
                     "null"
                 } else
-                    "Имя должно начинаться с заглавной буквы"
+                    "Имя должно начинаться с заглавной буквы\n"
             }
         },
         PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
             override fun nextQuestion(): Question = MATERIAL
             override fun check(answer: String): String {
-                return if (answer[0] != answer[0].toLowerCase()) {
+                return if (answer[0] != answer[0].toUpperCase()) {
                     "null"
                 } else
-                    "Профессия должна начинаться со строчной буквы"
+                    "Профессия должна начинаться со строчной буквы\n"
             }
         },
         MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "metal", "iron", "wood")) {
@@ -68,7 +66,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 return if (Regex("\\D+").find(answer)?.value == answer) {
                     "null"
                 } else
-                    "Материал не должен содержать цифр"
+                    "Материал не должен содержать цифр\n"
             }
         },
         BDAY("Когда меня создали?", listOf("2993")) {
@@ -77,7 +75,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 return if (Regex("\\d+").find(answer)?.value == answer ) {
                     "null"
                 } else
-                    "Год моего рождения должен содержать только цифры"
+                    "Год моего рождения должен содержать только цифры\n"
             }
         },
         SERIAL("Мой серийный номер?", listOf("2716057")) {
@@ -86,7 +84,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 return if (Regex("\\d{7}").find(answer)?.value == answer ) {
                     "null"
                 } else
-                    "Серийный номер содержит только цифры, и их 7"
+                    "Серийный номер содержит только цифры, и их 7\n"
             }
         },
         IDLE("На этом все, вопросов больше нет", listOf()) {
