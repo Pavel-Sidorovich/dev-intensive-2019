@@ -36,13 +36,5 @@ fun Activity.isKeyboardOpen(): Boolean{
 }
 
 fun Activity.isKeyboardClosed(): Boolean{
-    val r = Rect()
-    val view = (this
-        .findViewById(android.R.id.content) as ViewGroup).getChildAt(0) as View
-    view.getWindowVisibleDisplayFrame(r)
-    val heightDiff = view.rootView.height - (r.bottom - r.top)
-    if (heightDiff > 100) {
-        return false
-    }
-    return true
+    return !isKeyboardOpen()
 }
