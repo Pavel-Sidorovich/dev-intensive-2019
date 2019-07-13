@@ -18,10 +18,10 @@ import ru.skillbranch.devintensive.models.Bender
 class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEditorActionListener {
 
     private lateinit var benderImage: ImageView
-    lateinit var textTxt: TextView
-    lateinit var messageEt: EditText
-    lateinit var sendBtn: ImageView
-    lateinit var benderObj: Bender
+    private lateinit var textTxt: TextView
+    private lateinit var messageEt: EditText
+    private lateinit var sendBtn: ImageView
+    private lateinit var benderObj: Bender
     /**
      * Вызывается при первом создании или перезапуске Activity.
      *

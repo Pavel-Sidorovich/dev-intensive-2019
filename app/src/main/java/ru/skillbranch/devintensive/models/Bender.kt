@@ -16,7 +16,9 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         if (temp == "null") {
             if (question.answers.contains(answer)) {
                 question = question.nextQuestion()
-                return "Отлично - ты справился\n${question.question}" to status.color
+                return if(question == Question.IDLE){
+                    "\n${question.question}" to status.color
+                } else "Отлично - ты справился\n${question.question}" to status.color
             } else {
                 if (status == Status.CRITICAL) {
                     status = status.nextStatus()
@@ -54,7 +56,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
             override fun nextQuestion(): Question = MATERIAL
             override fun check(answer: String): String {
-                return if (answer[0] == answer[0].toLowerCase()) {
+                return if (answer[0] != answer[0].toLowerCase()) {
                     "null"
                 } else
                     "Профессия должна начинаться со строчной буквы"
