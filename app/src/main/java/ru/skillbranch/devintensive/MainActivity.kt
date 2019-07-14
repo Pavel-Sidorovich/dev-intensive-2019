@@ -163,15 +163,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("M_MainActivity", "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.name}")
     }
 
-    override fun onClick(v: View?) {
+     fun sendAnswer() {
         Log.d("M_MainActivity", "click")
-        val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())//.toLowerCase())
+        val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
         messageEt.setText("")
         val (r, g, b) = color
         benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
         textTxt.text = phrase
     }
 
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.iv_send -> {
+                sendAnswer()
+                hideKeyboard()
+            }
+            R.id.et_message -> sendAnswer()
+        }
+    }
 //    override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
 //        Log.d("M_MainActivity", "action")
 //        this.hideKeyboard()
@@ -180,12 +189,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //        return true
 //    }
 
+
     private fun makeSendOnActionDone(editText: EditText) {
-//        editText.setRawInputType(InputType.TYPE_CLASS_TEXT)
         editText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 onClick(editText)
-                hideKeyboard()
             }
             false
         }
