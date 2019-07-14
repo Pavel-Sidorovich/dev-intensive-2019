@@ -4,9 +4,7 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputType
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -183,9 +181,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //    }
 
     private fun makeSendOnActionDone(editText: EditText) {
-        editText.setRawInputType(InputType.TYPE_CLASS_TEXT)
+//        editText.setRawInputType(InputType.TYPE_CLASS_TEXT)
         editText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) sendBtn.performClick()
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                onClick(editText)
+                hideKeyboard()
+            }
             false
         }
     }
