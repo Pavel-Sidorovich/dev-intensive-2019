@@ -163,7 +163,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("M_MainActivity", "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.name}")
     }
 
-     fun sendAnswer() {
+     private fun sendAnswer() {
         Log.d("M_MainActivity", "click")
         val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
         messageEt.setText("")
@@ -181,14 +181,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.et_message -> sendAnswer()
         }
     }
-//    override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
-//        Log.d("M_MainActivity", "action")
-//        this.hideKeyboard()
-//
-//        onClick(p0)
-//        return true
-//    }
-
 
     private fun makeSendOnActionDone(editText: EditText) {
         editText.setOnEditorActionListener { _, actionId, _ ->
