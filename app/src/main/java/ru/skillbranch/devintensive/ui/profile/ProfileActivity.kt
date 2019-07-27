@@ -116,7 +116,7 @@ class ProfileActivity : AppCompatActivity() {
 
         et_repository.addTextChangedListener(textWatcher)
 
-        et_repository.onFocusChangeListener = View.OnFocusChangeListener { _, _ -> et_repository.setError(null, null) }
+        //et_repository.onFocusChangeListener = View.OnFocusChangeListener { _, _ -> et_repository.setError(null, null) }
 
         btn_edit.setOnClickListener {
             if (isEditMode) saveProfileInfo()
@@ -166,6 +166,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun saveProfileInfo() {
         if (!Utils.validating(et_repository.text.toString())) {
             et_repository.text.replace(0, et_repository.text.length, "")
+            et_repository.setError(null, null)
 //            et_repository.error = "null"
 //            et_repository.error = ""
 //            wr_repository.isErrorEnabled = false
