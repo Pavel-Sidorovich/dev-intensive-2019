@@ -1,6 +1,5 @@
 package ru.skillbranch.devintensive.models
 
-import android.graphics.drawable.Drawable
 import ru.skillbranch.devintensive.utils.Utils
 
 data class Profile(
