@@ -1,4 +1,5 @@
 # Компоненты платформы Android. Жизненный цикл Activity
+<img src="https://user-images.githubusercontent.com/10943612/61997470-7d063b00-b0aa-11e9-844c-e5f969ac5d08.png" width="23%"></img> <img src="https://user-images.githubusercontent.com/10943612/61997432-09fcc480-b0aa-11e9-861b-787266d3763b.png" width="23%"></img> <img src="https://user-images.githubusercontent.com/10943612/61997438-17b24a00-b0aa-11e9-8775-3192c701145e.png" width="23%"></img> <img src="https://user-images.githubusercontent.com/10943612/61997481-b5a61480-b0aa-11e9-87cf-6efdab7881bc.png" width="23%"></img> 
 ## Сохранение состояния при пересоздании Activity
 Необходимо реализовать сохранение состояния пользовательского ввода при пересоздании Activity
 ```bash
