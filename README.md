@@ -1,7 +1,5 @@
 # Android Architecture Components. Сохранение состояния Application
-
-![Screenshot_1564229462](https://user-images.githubusercontent.com/10943612/61994270-78795c80-b081-11e9-8ab6-09ec0fd15839.png)
-![Screenshot_1564229690](https://user-images.githubusercontent.com/10943612/61994294-e2920180-b081-11e9-8e4c-b56129fe3271.png)
+<img src="https://user-images.githubusercontent.com/10943612/61995784-9a7cda00-b095-11e9-99cd-7863fa235313.png" width="30%"></img> <img src="https://user-images.githubusercontent.com/10943612/61994270-78795c80-b081-11e9-8ab6-09ec0fd15839.png" width="30%"></img> <img src="https://user-images.githubusercontent.com/10943612/61994294-e2920180-b081-11e9-8e4c-b56129fe3271.png" width="30%"></img> 
 
 ## Верстка ProfileActivity
 Необходимо реализовать верстку экрана согласно макетам с использованием стилей (любым удобным для тебя способом (LinearLayout/RelativeLayout/ConstraintLayout)
