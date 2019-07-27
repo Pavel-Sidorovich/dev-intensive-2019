@@ -1,107 +1,92 @@
-# Компоненты платформы Android. Жизненный цикл Activity
-## Сохранение состояния при пересоздании Activity
-Необходимо реализовать сохранение состояния пользовательского ввода при пересоздании Activity
+# Android Architecture Components. Сохранение состояния Application
+## Верстка ProfileActivity
+Необходимо реализовать верстку экрана согласно макетам с использованием стилей (любым удобным для тебя способом (LinearLayout/RelativeLayout/ConstraintLayout)
+
 ```bash
-Реализуй сохранение введенного текста в поле EditText (et_message) при пересоздании Activity
+Сверстай экран профиля пользователя, он должен содержать в себе следующие View:
+Кнопка переключения в режим редактирования (ImageButton) @+id/btn_edit
+Кнопка переключения режима Day/Night (ImageButton) @+id/btn_switch_theme
+Аватар пользователя (ImageView/CircleImageView) @+id/iv_avatar
+Псевдоним (TextView) @+id/tv_nick_name
+Ранг (TextView) @+id/tv_rank
+Рейтинг (TextView) @+id/tv_rating
+Уважение (TextView) @+id/tv_respect
+Имя (EditText) @+id/et_first_name
+Фамилия (EditText) @+id/et_last_name
+О себе (EditText) @+id/et_about
+Обертка над "О себе" (TextInputLayout) @+id/wr_about
+Репозиторий (EditText) @+id/et_repository
+Обертка над "Репозиторий" (TextInputLayout) @+id/wr_repository
 ```
 
-## Bender.listenAnswer (positive case)
-Необходимо реализовать метод listenAnswer класса Bender, принимающий в качестве аргумента ответ пользователя
-и возвращающий Pair, содержащую следующий вопрос и цвет текущего статуса экземпляра класса Bender
+## Редактирование профиля
+Реализуй бизнес логику режима редактирования профиля пользователя и сохранение измененных данных в SharedPreferences, режим редактирования должен сохраняться при перевороте экрана
+
 ```bash
-Реализуй метод listenAnswer с сигнатурой listenAnswer(answer: String): Pair>.
+Необходимо реализовать сохранение введенных данных пользователя (данные сохраняются при нажатии пользователем
+кнопки сохранения данных (в EDIT_MODE @id/btn_edit)) с применением ViewModel и PreferencesRepository. Введенные
+данные должны быть сохранены в SharedPreferences. Режим редактирования должен сохраняться при перевороте экрана
+```
 
-Вопросы и ответы класса Bender, а также значения цветов статусов, прикреплены к ресурсам урока
-
-Требования к методу:
-При вводе верного ответа изменить текущий вопрос на следующий вопрос (question = question.nextQuestion()) 
-и вернуть "Отлично - ты справился\n${question.question}" to status.color
-Если вопросы закончились (Question.IDLE), вернуть "Отлично - ты справился\nНа этом все, вопросов больше нет"
-Необходимо сохранять состояние экземпляра класса Bender при пересоздании Activity 
-(достаточно сохранить Status, Question)
-
+## Переключение режима Day/Night
+Необходимо реализовать логику переключения между режимами Day/Night и сохранение активного режима в SharedPreferences
+```bash
+Реализуй переключение между режимами Day/Night при клике на кнопку @id/btn_switch_theme и установи дефолтное
+значение режима из PreferencesRepository (сохраненное в SharedPreferences) в методе onCreate() класса App.
+Атрибуты тем приложения colorAccentedSurface, сolorIcon, colorDivider
+```
+## *CircleImageView
+Необходимо реализовать CustomView для скругления установленного Drawable
+```bash
+Реализуй CustomView с названием класса CircleImageView и кастомными xml атрибутами cv_borderColor (цвет границы
+(format="color") по умолчанию white) и cv_borderWidth (ширина границы (format="dimension") по умолчанию 2dp).
+CircleImageView должна превращать установленное изображение в круглое изображение с цветной рамкой, у
+CircleImageView должны быть реализованы методы @Dimension getBorderWidth():Int, setBorderWidth(@Dimension dp:Int),
+getBorderColor():Int, setBorderColor(hex:String), setBorderColor(@ColorRes colorId: Int). Используй
+CircleImageView как ImageView для аватара пользователя (@id/iv_avatar)
+```
+## *SplashTheme
+Необходимо реализовать тему, отображаемую при загрузке приложения до момента создания Activity
+```bash
+Реализуй SplashTheme в соответствии с макетами (@style/SplahTheme). Необходимо реализовать ее отображение при
+запуске приложения до момента создания Activity. Как только Activity будет создана, необходимо установить AppTheme
+```
+## *firstName + lastName = nickName
+Необходимо реализовать преобразование firstName и lastName пользователя в его nickName
+```bash
+Реализуй Profile.nickName как вычисляемое свойство из имени и фамилии пользователя, возвращающее значение
+псевдонима пользователя в виде транслитерированной строки с заменой пробела на "_"
 Пример:
-//Как меня зовут?
-benderObj.listenAnswer("Bender") //Отлично - ты справился\nНазови мою профессию?
-
-//Мой серийный номер?
-benderObj.listenAnswer("2716057") //Отлично - ты справился\nНа этом все, вопросов больше нет
-
-//Как меня зовут?
-benderObj.listenAnswer("Bender") //Отлично - ты справился\nНазови мою профессию?
-//onPause() -> onStop() -> onDestroy() -> onCreate()
-//Назови мою профессию?
+Profile: firsName = "Женя", lastName = "Стереотипов"; Profile.nickName //Zhenya_Stereotipov
+(Используй реализованный ранее метод Utils.transliteration)
 ```
-
-## Bender.listenAnswer (negative case)
-Необходимо реализовать метод listenAnswer класса Bender, принимающий в качестве аргумента ответ пользователя
-и возвращающий Pair, содержащую текст ошибки и цвет следующего статуса экземпляра класса Bender
+## *Text Input Layout error
+Необходимо реализовать вадидацию вводимых пользователем данных в поле @id/et_repository на соответствие url валидному github аккаунту
 ```bash
-Реализуй метод listenAnswer со следующей сигнатурой listenAnswer(answer: String): Pair.
-
-Вопросы и верные ответы, а также значения цветов статусов, прикреплены к ресурсам урока
-
-Требования к методу:
-При вводе неверного ответа изменить текущий статус на следующий статус (status = status.nextStatus()),
-вернуть "Это неправильный ответ\n${question.question}" to status.color и изменить цвет ImageView (iv_bender)
-на цвет status.color (метод setColorFilter(color,"MULTIPLY"))
-При вводе неверного ответа более 3 раз сбросить состояние сущности Bender на значение по умолчанию 
-(status = Status.NORMAL, question = Question.NAME) и вернуть "Это неправильный ответ. Давай все по
-новой\n${question.question}" to status.color и изменить цвет ImageView (iv_bender) на цвет status.color
-Необходимо сохранять состояние экземпляра класса Bender при пересоздании Activity (достаточно сохранить
-Status, Question)
-
+Реализуй валидацию вводимых пользователем данных в поле @id/et_repository на соответствие url валидному github
+аккаунту, вводимое значение может быть пустой строкой или должно содержать домен github.com (https://, www,
+https://www) и аккаунт пользователя (пути для исключения прикреплены в ресурсах урока). Если URL невалиден,
+выводить сообщение "Невалидный адрес репозитория" в TextInputLayout (wr_repository.error(message)) и запрещать
+сохранение невалидного значения в SharedPreferences (при попытке сохранить невалидное поле очищать et_repository
+при нажатии @id/btn_edit)
 Пример:
-//Как меня зовут? #NORMAL(Triple(255, 255, 255))
-benderObj.listenAnswer("Fry") //Это неправильный ответ\nКак меня зовут? #WARNING(Triple(255, 120, 0))
-
-//Мой серийный номер? #CRITICAL(Triple(255, 0, 0))
-benderObj.listenAnswer("0000000") //Это неправильный ответ. Давай все по новой\nКак меня зовут? 
-#NORMAL(Triple(255, 255, 255))
-
-//Как меня зовут? #WARNING(Triple(255, 120, 0))
-benderObj.listenAnswer("Fry") //Это неправильный ответ\nКак меня зовут? #CRITICAL(Triple(255, 0, 0))
-//onPause() -> onStop() -> onDestroy() -> onCreate()
-//Как меня зовут? #CRITICAL(Triple(255, 0, 0))
+https://github.com/johnDoe //валиден
+https://www.github.com/johnDoe //валиден
+www.github.com/johnDoe //валиден
+github.com/johnDoe //валиден
+https://anyDomain.github.com/johnDoe //невалиден
+https://github.com/ //невалиден
+https://github.com //невалиден
+https://github.com/johnDoe/tree //невалиден
+https://github.com/johnDoe/tree/something //невалиден
+https://github.com/enterprise //невалиден
+https://github.com/pricing //невалиден
+https://github.com/join //невалиден
 ```
-## *Activity.hideKeyboard
-Необходимо реализовать extension для скрытия Software Keyboard
+## **Преобразование Инициалов в Drawable
+Необходимо реализовать программное преобразование инициалов пользователя в Drawable с цветным фоном и буквами
 ```bash
-Реализуй extension Activity.hideKeyboard(), скрывающую экранную клавиатуру
-```
-## *actionDone
-Необходимо реализовать кнопку DONE в Software Keyboard, при нажатии на которую будет происходить 
-отправка сообщения в экземпляр класса Bender и скрытие клавиатуры
-```bash
-Реализуй кнопку DONE в Software Keyboard (imeOptions="actionDone"), при нажатии на которую будет
-происходить отправка сообщения в экземпляр класса Bender и скрытие клавиатуры. Для этого реализуй
-OnEditorActionListener для EditText (et_message)
-```
-## *Проверка правильности формата ответов
-Необходимо реализовать проверку вводимых пользователем ответов на соответствие условиям валидации
-для каждого типа вопроса
-```bash
-Реализуй проверку вводимых пользователем ответов на соответствие условиям валидации для каждого
-типа вопроса (валидация НЕ влияет на Status)
-Question.NAME -> "Имя должно начинаться с заглавной буквы"
-Question.PROFESSION -> "Профессия должна начинаться со строчной буквы"
-Question.MATERIAL -> "Материал не должен содержать цифр"
-Question.BDAY -> "Год моего рождения должен содержать только цифры"
-Question.SERIAL -> "Серийный номер содержит только цифры, и их 7"
-Question.IDLE -> //игнорировать валидацию
-
-Пример:
-//Как меня зовут? #NORMAL(Triple(255, 255, 255))
-benderObj.listenAnswer("bender") //Имя должно начинаться с заглавной буквы\nКак меня зовут? 
-#NORMAL(Triple(255, 255, 255))
-
-//Отлично - ты справился\nНа этом все, вопросов больше нет #NORMAL(Triple(255, 255, 255))
-benderObj.listenAnswer("any text") //На этом все, вопросов больше нет 
-#NORMAL(Triple(255, 255, 255))
-```
-## **Activity.isKeyboardOpen Activity.isKeyboardClosed
-Необходимо реализовать extension для проверки, открыта или нет Software Keyboard
-```bash
-Реализуй extension для проверки, открыта или нет Software Keyboard с применением метода 
-rootView.getWindowVisibleDisplayFrame(Rect())
+Реализуй программное преобразование инициалов пользователя (если доступны - заполнено хотя бы одно поле) в
+Drawable с фоном colorAccent (c учетом темы) и буквами инициалов (colorWhite) и установи полученное изображение
+как изображение по умолчанию для профиля пользователя
 ```

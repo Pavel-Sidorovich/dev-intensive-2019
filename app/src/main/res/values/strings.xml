@@ -1,11 +1,12 @@
 <resources>
-    <!-- DEFAULT STRINGS -->
-    <string name="app_name">Dev-intensive</string>
-
-    <!-- MY STRINGS -->
-    <string name="error_message_network">Network error</string>
-    <string name="error_message_call">Call failed</string>
-    <string name="error_message_map">Map loading failed</string>
-    <string name="centerimage">Сenter Image</string>
-    <string name="bender">bender</string>
+    <string name="app_name">Chat Dev-intensive</string>
+    <string name="profile_label_rating">Рейтинг</string>
+    <string name="profile_label_respect">Уважение</string>
+    <string name="profile_hint_repository">Репозиторий</string>
+    <string name="profile_hint_about">О себе</string>
+    <string name="profile_hint_last_name">Фамилия</string>
+    <string name="profile_hint_first_name">Имя</string>
+    <string name="day_night_switch_descr">day/night switch</string>
+    <string name="avatar_descr">avatar</string>
+    <string name="edit_descr">edit</string>
 </resources>

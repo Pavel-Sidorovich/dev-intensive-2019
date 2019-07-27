@@ -23,8 +23,7 @@ fun Activity.hideKeyboard() {
 
 fun Activity.isKeyboardOpen(): Boolean{
     val r = Rect()
-    val view = (this
-        .findViewById(android.R.id.content) as ViewGroup).getChildAt(0) as View
+    val view = (this.findViewById(android.R.id.content) as ViewGroup).getChildAt(0) as View
     view.getWindowVisibleDisplayFrame(r)
     val heightDiff = view.rootView.height - (r.bottom - r.top)
     if (heightDiff > 100) { // if more than 100 pixels, its probably a keyboard...

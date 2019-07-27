@@ -114,4 +114,6 @@ object Utils {
         return lat //Return latinized string
     }
 
+    //fun validating(github: String) = kotlin.text.Regex("(https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,38}$").find(github)?.value == github
+    fun validating(github: String) = kotlin.text.Regex("(https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[a-zA-Z\\d]{1,39}$").find(github)?.value == github
 }
