@@ -201,7 +201,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
             return
         }
 
-        Log.d("M_Citcle", "onDrawCircle")
+        Log.d("M_Circle", "onDrawCircle")
 
         if (mCircleBackgroundColor != Color.TRANSPARENT) {
             canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mCircleBackgroundPaint)

@@ -74,9 +74,6 @@ class ProfileActivity : AppCompatActivity() {
                 drawInitials()
             }
         }
-
-
-        Log.d("M_ProfileActivity", "updateUiEnd")
     }
 
     private fun initViews(savedInstanceState: Bundle?) {
@@ -97,26 +94,23 @@ class ProfileActivity : AppCompatActivity() {
         val textWatcher = object : TextWatcher {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (!Utils.validating(et_repository.text.toString())) {
+                if (!Utils.verification(et_repository.text.toString())) {
                     et_repository.error = "Невалидный адрес репозитория"
                 }
             }
 
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
-            ) {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
 
             override fun afterTextChanged(s: Editable) {
 
             }
         }
-
-
         et_repository.addTextChangedListener(textWatcher)
-
-//        et_repository.onFocusChangeListener = View.OnFocusChangeListener { _, _ -> et_repository.setError(null, null)}
+//        if (et_repository.text.toString().trim() == ""){
+//            Log.d("M_ProfileActivity", "${et_repository.text}2")
+//            et_repository.setError(null, null)
+//        }
 
         btn_edit.setOnClickListener {
             if (isEditMode) saveProfileInfo()
@@ -164,11 +158,15 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun saveProfileInfo() {
-        if (!Utils.validating(et_repository.text.toString())) {
-            et_repository.text.replace(0, et_repository.text.length, "")
+//        if (et_repository.text.toString().trim() == ""){
+//            Log.d("M_ProfileActivity", "${et_repository.text}3")
+//            et_repository.setError(null, null)
+//        }
+
+        if (!Utils.verification(et_repository.text.toString())) {
             et_repository.setError(null, null)
+            et_repository.text.replace(0, et_repository.text.length, "")
 //            et_repository.error = ""
-//            wr_repository.isErrorEnabled = false
         }
 
         val circleImageView: CircleImageView = findViewById(R.id.iv_avatar)

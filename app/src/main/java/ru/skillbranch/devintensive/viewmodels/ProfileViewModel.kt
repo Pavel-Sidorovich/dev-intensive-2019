@@ -13,7 +13,6 @@ class ProfileViewModel : ViewModel() {
     private val profileDate = MutableLiveData<Profile>()
     private val appTheme = MutableLiveData<Int>()
     init {
-        Log.d("M_ProfileViewModel", "init view model")
         profileDate.value = repository.getProfile()
         appTheme.value = repository.getAppTheme()
     }
@@ -39,6 +38,5 @@ class ProfileViewModel : ViewModel() {
             appTheme.value = AppCompatDelegate.MODE_NIGHT_YES
         }
         repository.saveAppTheme(appTheme.value!!)
-
     }
 }

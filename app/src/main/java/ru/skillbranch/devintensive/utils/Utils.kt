@@ -26,16 +26,16 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        if (firstName != null && firstName != "" && firstName != " ") {
-            val firstName = firstName.trim()
-            if (lastName != null && lastName != "" && lastName != " ") {
-                val lastName = lastName.trim()
-                return firstName[0].toUpperCase() + "" + lastName[0].toUpperCase()
+        if (firstName != null && firstName.trim() != "") {
+            val trimFirstName = firstName.trim()
+            if (lastName != null && lastName.trim() != "") {
+                val trimLastName = lastName.trim()
+                return trimFirstName[0].toUpperCase() + "" + trimLastName[0].toUpperCase()
             }
-            return firstName[0].toUpperCase() + ""
-        } else if (lastName != null && lastName != "" && lastName != " ") {
-            val lastName = lastName.trim()
-            return lastName[0].toUpperCase() + ""
+            return trimFirstName[0].toUpperCase() + ""
+        } else if (lastName != null && lastName.trim() != "") {
+            val trimLastName = lastName.trim()
+            return trimLastName[0].toUpperCase() + ""
         } else return null
     }
 
@@ -115,5 +115,5 @@ object Utils {
     }
 
     //fun validating(github: String) = kotlin.text.Regex("(https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,38}$").find(github)?.value == github
-    fun validating(github: String) = kotlin.text.Regex("(https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[\\w\\d-_]{1,39}$").find(github)?.value == github
+    fun verification(github: String) = kotlin.text.Regex("|((https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[\\w\\d-_]{1,39}$)").find(github)?.value == github
 }
