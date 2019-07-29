@@ -2,6 +2,10 @@ package ru.skillbranch.devintensive.utils
 
 
 object Utils {
+
+    /**
+     * Разбивает полное имя на имя и фамилию, если возможно
+     */
     fun parseFullName(fullName: String?): Pair<String?, String?> {
         if (fullName == "" || fullName == " " || fullName == null)
             return null to null
@@ -21,10 +25,16 @@ object Utils {
         return firstName to lastName
     }
 
+    /**
+     * Возвращает строку, написанную латинскими символами. Заменяет " " на указанный divider
+     */
     fun transliteration(payload: String, divider: String = " "): String {
         return convertRU(payload.trim().replace(" ", divider))
     }
 
+    /**
+     * Возвращает инициалы пользователя
+     */
     fun toInitials(firstName: String?, lastName: String?): String? {
         if (firstName != null && firstName.trim() != "") {
             val trimFirstName = firstName.trim()
@@ -39,6 +49,9 @@ object Utils {
         } else return null
     }
 
+    /**
+     * Вспомогательная функция для transliteration
+     */
     private fun convertRU(cyr: String): String {
         //Lower case letters
         var lat = cyr.replace("а".toRegex(), "a")
@@ -114,6 +127,8 @@ object Utils {
         return lat //Return latinized string
     }
 
-    //fun validating(github: String) = kotlin.text.Regex("(https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,38}$").find(github)?.value == github
-    fun verification(github: String) = kotlin.text.Regex("|((https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[\\w\\d-_]{1,39}$)").find(github)?.value == github
+    /**
+     * Проверяет на валидность GitHub
+     */
+    fun verification(github: String) = kotlin.text.Regex("((https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[\\w\\d-_]{1,39}$)|").find(github)?.value == github
 }

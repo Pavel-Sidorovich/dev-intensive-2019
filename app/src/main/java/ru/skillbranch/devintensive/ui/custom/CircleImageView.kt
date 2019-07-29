@@ -51,7 +51,6 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
         private const val DEFAULT_CIRCLE_BACKGROUND_COLOR = Color.GREEN
         private const val DEFAULT_BORDER_OVERLAY = false
-        private const val DEFAULT_DRAWABLE = R.drawable.avatar_default
     }
 
     private val mDrawableRect = RectF()
@@ -90,18 +89,17 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         }
 
     init {
-            val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyle, 0)
 
-            mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
-            mBorderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
-            mBorderOverlay = a.getBoolean(R.styleable.CircleImageView_cv_borderOverlay, DEFAULT_BORDER_OVERLAY)
-//        a.getColor()
-            mCircleBackgroundColor =
-                a.getColor(R.styleable.CircleImageView_cv_circleBackgroundColor, DEFAULT_CIRCLE_BACKGROUND_COLOR)
+        mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
+        mBorderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
+        mBorderOverlay = a.getBoolean(R.styleable.CircleImageView_cv_borderOverlay, DEFAULT_BORDER_OVERLAY)
+        mCircleBackgroundColor =
+            a.getColor(R.styleable.CircleImageView_cv_circleBackgroundColor, DEFAULT_CIRCLE_BACKGROUND_COLOR)
 
-            a.recycle()
+        a.recycle()
 
-            init()
+        init()
     }
 
     var borderColor: Int
@@ -165,9 +163,9 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         super.setScaleType(SCALE_TYPE)
         mReady = true
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            outlineProvider = OutlineProvider()
-        }
+
+        outlineProvider = OutlineProvider()
+
 
         if (mSetupPending) {
             setup()

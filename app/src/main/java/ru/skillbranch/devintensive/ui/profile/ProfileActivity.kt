@@ -88,6 +88,8 @@ class ProfileActivity : AppCompatActivity() {
             "respect" to tv_respect
         )
 
+        Log.d("M_ProfileActivity", "initViews1")
+
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         showCurrentMode(isEditMode)
 
