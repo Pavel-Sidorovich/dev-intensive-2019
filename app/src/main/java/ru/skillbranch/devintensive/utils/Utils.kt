@@ -1,5 +1,11 @@
 package ru.skillbranch.devintensive.utils
 
+import android.content.Context
+import android.util.TypedValue
+import android.util.DisplayMetrics
+
+
+
 
 object Utils {
 
@@ -130,5 +136,13 @@ object Utils {
     /**
      * Проверяет на валидность GitHub
      */
-    fun verification(github: String) = kotlin.text.Regex("((https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[\\w\\d-_]{1,39}$)|").find(github)?.value == github
+    fun verification(github: String) = Regex("((https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[\\w\\d-_]{1,39}$)|").find(github)?.value == github
+
+    fun dpToPx(dp: Float, context: Context): Int{
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics).toInt()
+    }
+
+    fun pxToDp(px: Float, context: Context): Int{
+        return (px / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)).toInt()
+    }
 }

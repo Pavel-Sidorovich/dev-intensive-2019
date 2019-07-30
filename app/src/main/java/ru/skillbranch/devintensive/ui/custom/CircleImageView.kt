@@ -29,13 +29,14 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
+import androidx.annotation.*
 import ru.skillbranch.devintensive.R
 import kotlin.math.min
 import kotlin.math.pow
+import android.util.TypedValue
+import ru.skillbranch.devintensive.utils.Utils.dpToPx
+import ru.skillbranch.devintensive.utils.Utils.pxToDp
+
 
 class CircleImageView @JvmOverloads constructor(context: Context, attrs: AttributeSet, defStyle: Int = 0) :
     ImageView(context, attrs, defStyle) {
@@ -78,6 +79,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
     private var mReady: Boolean = false
     private var mSetupPending: Boolean = false
     private var mBorderOverlay: Boolean = false
+
     var isDisableCircularTransformation: Boolean = false
         set(disableCircularTransformation) {
             if (isDisableCircularTransformation == disableCircularTransformation) {
@@ -88,31 +90,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
             initializeBitmap()
         }
 
-    init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyle, 0)
-
-        mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
-        mBorderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
-        mBorderOverlay = a.getBoolean(R.styleable.CircleImageView_cv_borderOverlay, DEFAULT_BORDER_OVERLAY)
-        mCircleBackgroundColor =
-            a.getColor(R.styleable.CircleImageView_cv_circleBackgroundColor, DEFAULT_CIRCLE_BACKGROUND_COLOR)
-
-        a.recycle()
-
-        init()
-    }
-
-    var borderColor: Int
-        get() = mBorderColor
-        set(@ColorRes borderColor) {
-            if (borderColor == mBorderColor) {
-                return
-            }
-
-            mBorderColor = borderColor
-            mBorderPaint.color = mBorderColor
-            invalidate()
-        }
+    fun getBorderColor() = mBorderColor
 
     fun setBorderColor(hex: String) {
         val borderColor = Color.parseColor(hex)
@@ -125,6 +103,49 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         invalidate()
     }
 
+    fun setBorderColor(@ColorRes colorId: Int) {
+        if (colorId == mBorderColor) {
+            return
+        }
+
+        resources.getColor(colorId, context.theme)
+
+        mBorderPaint.color = mBorderColor
+        invalidate()
+    }
+
+    fun setBorderWidth(@Dimension dp:Int){
+        if (dp == dpToPx(mBorderWidth.toFloat(), context)) {
+            return
+        }
+
+        mBorderWidth = dpToPx(mBorderWidth.toFloat(),context)
+        setup()
+    }
+
+    fun getBorderWidth():Int = pxToDp(mBorderColor.toFloat(), context)
+
+    init {
+        val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyle, 0)
+
+        mBorderWidth = a.getDimensionPixelSize(
+            R.styleable.CircleImageView_cv_borderWidth,
+            dpToPx(DEFAULT_BORDER_WIDTH.toFloat(), context)
+        )
+        println(mBorderWidth)
+        mBorderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
+        mBorderOverlay = a.getBoolean(R.styleable.CircleImageView_cv_borderOverlay, DEFAULT_BORDER_OVERLAY)
+        mCircleBackgroundColor =
+            a.getColor(R.styleable.CircleImageView_cv_circleBackgroundColor, DEFAULT_CIRCLE_BACKGROUND_COLOR)
+
+        a.recycle()
+
+        init()
+    }
+
+    //@Dimension getBorderWidth():Int, setBorderWidth(@Dimension dp:Int)
+
+
     private var circleBackgroundColor: Int
         get() = mCircleBackgroundColor
         set(@ColorInt circleBackgroundColor) {
@@ -135,17 +156,6 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
             mCircleBackgroundColor = circleBackgroundColor
             mCircleBackgroundPaint.color = circleBackgroundColor
             invalidate()
-        }
-
-    var borderWidth: Int
-        get() = mBorderWidth
-        set(borderWidth) {
-            if (borderWidth == mBorderWidth) {
-                return
-            }
-
-            mBorderWidth = borderWidth
-            setup()
         }
 
     var isBorderOverlay: Boolean
