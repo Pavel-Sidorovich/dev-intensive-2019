@@ -1,0 +1,84 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Неизвестный </title></head><body>
+<h1 id="android-architecture-components-application">Android Architecture Components. Сохранение состояния Application</h1>
+<p><img alt="Screenshot_1564229462" src="https://user-images.githubusercontent.com/10943612/61994270-78795c80-b081-11e9-8ab6-09ec0fd15839.png" />
+<img alt="Screenshot_1564229690" src="https://user-images.githubusercontent.com/10943612/61994294-e2920180-b081-11e9-8e4c-b56129fe3271.png" /></p>
+<h2 id="profileactivity">Верстка ProfileActivity</h2>
+<p>Необходимо реализовать верстку экрана согласно макетам с использованием стилей (любым удобным для тебя способом (LinearLayout/RelativeLayout/ConstraintLayout)</p>
+<p><code>bash
+Сверстай экран профиля пользователя, он должен содержать в себе следующие View:
+Кнопка переключения в режим редактирования (ImageButton) @+id/btn_edit
+Кнопка переключения режима Day/Night (ImageButton) @+id/btn_switch_theme
+Аватар пользователя (ImageView/CircleImageView) @+id/iv_avatar
+Псевдоним (TextView) @+id/tv_nick_name
+Ранг (TextView) @+id/tv_rank
+Рейтинг (TextView) @+id/tv_rating
+Уважение (TextView) @+id/tv_respect
+Имя (EditText) @+id/et_first_name
+Фамилия (EditText) @+id/et_last_name
+О себе (EditText) @+id/et_about
+Обертка над "О себе" (TextInputLayout) @+id/wr_about
+Репозиторий (EditText) @+id/et_repository
+Обертка над "Репозиторий" (TextInputLayout) @+id/wr_repository</code></p>
+<h2 id="_1">Редактирование профиля</h2>
+<p>Реализуй бизнес логику режима редактирования профиля пользователя и сохранение измененных данных в SharedPreferences, режим редактирования должен сохраняться при перевороте экрана</p>
+<p><code>bash
+Необходимо реализовать сохранение введенных данных пользователя (данные сохраняются при нажатии пользователем
+кнопки сохранения данных (в EDIT_MODE @id/btn_edit)) с применением ViewModel и PreferencesRepository. Введенные
+данные должны быть сохранены в SharedPreferences. Режим редактирования должен сохраняться при перевороте экрана</code></p>
+<h2 id="daynight">Переключение режима Day/Night</h2>
+<p>Необходимо реализовать логику переключения между режимами Day/Night и сохранение активного режима в SharedPreferences
+<code>bash
+Реализуй переключение между режимами Day/Night при клике на кнопку @id/btn_switch_theme и установи дефолтное
+значение режима из PreferencesRepository (сохраненное в SharedPreferences) в методе onCreate() класса App.
+Атрибуты тем приложения colorAccentedSurface, сolorIcon, colorDivider</code></p>
+<h2 id="circleimageview">*CircleImageView</h2>
+<p>Необходимо реализовать CustomView для скругления установленного Drawable
+<code>bash
+Реализуй CustomView с названием класса CircleImageView и кастомными xml атрибутами cv_borderColor (цвет границы
+(format="color") по умолчанию white) и cv_borderWidth (ширина границы (format="dimension") по умолчанию 2dp).
+CircleImageView должна превращать установленное изображение в круглое изображение с цветной рамкой, у
+CircleImageView должны быть реализованы методы @Dimension getBorderWidth():Int, setBorderWidth(@Dimension dp:Int),
+getBorderColor():Int, setBorderColor(hex:String), setBorderColor(@ColorRes colorId: Int). Используй
+CircleImageView как ImageView для аватара пользователя (@id/iv_avatar)</code></p>
+<h2 id="splashtheme">*SplashTheme</h2>
+<p>Необходимо реализовать тему, отображаемую при загрузке приложения до момента создания Activity
+<code>bash
+Реализуй SplashTheme в соответствии с макетами (@style/SplahTheme). Необходимо реализовать ее отображение при
+запуске приложения до момента создания Activity. Как только Activity будет создана, необходимо установить AppTheme</code></p>
+<h2 id="firstname-lastname-nickname">*firstName + lastName = nickName</h2>
+<p>Необходимо реализовать преобразование firstName и lastName пользователя в его nickName
+<code>bash
+Реализуй Profile.nickName как вычисляемое свойство из имени и фамилии пользователя, возвращающее значение
+псевдонима пользователя в виде транслитерированной строки с заменой пробела на "_"
+Пример:
+Profile: firsName = "Женя", lastName = "Стереотипов"; Profile.nickName //Zhenya_Stereotipov
+(Используй реализованный ранее метод Utils.transliteration)</code></p>
+<h2 id="text-input-layout-error">*Text Input Layout error</h2>
+<p>Необходимо реализовать вадидацию вводимых пользователем данных в поле @id/et_repository на соответствие url валидному github аккаунту
+<code>bash
+Реализуй валидацию вводимых пользователем данных в поле @id/et_repository на соответствие url валидному github
+аккаунту, вводимое значение может быть пустой строкой или должно содержать домен github.com (https://, www,
+https://www) и аккаунт пользователя (пути для исключения прикреплены в ресурсах урока). Если URL невалиден,
+выводить сообщение "Невалидный адрес репозитория" в TextInputLayout (wr_repository.error(message)) и запрещать
+сохранение невалидного значения в SharedPreferences (при попытке сохранить невалидное поле очищать et_repository
+при нажатии @id/btn_edit)
+Пример:
+https://github.com/johnDoe //валиден
+https://www.github.com/johnDoe //валиден
+www.github.com/johnDoe //валиден
+github.com/johnDoe //валиден
+https://anyDomain.github.com/johnDoe //невалиден
+https://github.com/ //невалиден
+https://github.com //невалиден
+https://github.com/johnDoe/tree //невалиден
+https://github.com/johnDoe/tree/something //невалиден
+https://github.com/enterprise //невалиден
+https://github.com/pricing //невалиден
+https://github.com/join //невалиден</code></p>
+<h2 id="drawable">**Преобразование Инициалов в Drawable</h2>
+<p>Необходимо реализовать программное преобразование инициалов пользователя в Drawable с цветным фоном и буквами
+<code>bash
+Реализуй программное преобразование инициалов пользователя (если доступны - заполнено хотя бы одно поле) в
+Drawable с фоном colorAccent (c учетом темы) и буквами инициалов (colorWhite) и установи полученное изображение
+как изображение по умолчанию для профиля пользователя</code></p>
+</body></html>
