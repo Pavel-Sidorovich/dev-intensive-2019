@@ -71,7 +71,7 @@ class ProfileActivity : AppCompatActivity() {
             if(Utils.toInitials(et_first_name.text.toString(), et_last_name.text.toString()) == null){
                 circleImageView.setImageResource(R.drawable.avatar_default)
             } else {
-               drawInitials()
+                drawInitials()
             }
         }
     }
@@ -98,6 +98,7 @@ class ProfileActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!Utils.verification(et_repository.text.toString())) {
                     wr_repository.error = "Невалидный адрес репозитория"
+                    wr_repository.isErrorEnabled = true
                 } else {
                     wr_repository.error = null
                     wr_repository.isErrorEnabled = false
@@ -111,7 +112,6 @@ class ProfileActivity : AppCompatActivity() {
 
             }
         }
-
         et_repository.addTextChangedListener(textWatcher)
 //        if (et_repository.text.toString().trim() == ""){
 //            Log.d("M_ProfileActivity", "${et_repository.text}2")
@@ -164,10 +164,15 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun saveProfileInfo() {
+//        if (et_repository.text.toString().trim() == ""){
+//            Log.d("M_ProfileActivity", "${et_repository.text}3")
+//            et_repository.setError(null, null)
+//        }
 
         if (!Utils.verification(et_repository.text.toString())) {
 //            et_repository.setError(null, null)
             et_repository.text.replace(0, et_repository.text.length, "")
+//            et_repository.error = ""
         }
 
         val circleImageView: CircleImageView = findViewById(R.id.iv_avatar)
