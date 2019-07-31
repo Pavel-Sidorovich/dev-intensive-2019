@@ -5,8 +5,9 @@ import android.util.TypedValue
 import android.util.DisplayMetrics
 
 
-
-
+/**
+ * Вспомогательные функции
+ */
 object Utils {
 
     /**
@@ -146,3 +147,4 @@ object Utils {
         return (px / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)).toInt()
     }
 }
+

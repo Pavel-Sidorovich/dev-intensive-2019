@@ -143,9 +143,6 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         init()
     }
 
-    //@Dimension getBorderWidth():Int, setBorderWidth(@Dimension dp:Int)
-
-
     private var circleBackgroundColor: Int
         get() = mCircleBackgroundColor
         set(@ColorInt circleBackgroundColor) {
@@ -236,10 +233,6 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         super.setPaddingRelative(start, top, end, bottom)
         setup()
     }
-
-//    fun setCircleBackgroundColorResource(@ColorRes circleBackgroundRes: Int) {
-//        circleBackgroundColor = context.resources.getColor(circleBackgroundRes)
-//    }
 
     override fun setImageBitmap(bm: Bitmap) {
         super.setImageBitmap(bm)
