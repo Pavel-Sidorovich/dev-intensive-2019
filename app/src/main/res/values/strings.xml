@@ -6,7 +6,7 @@
     <string name="profile_hint_about">О себе</string>
     <string name="profile_hint_last_name">Фамилия</string>
     <string name="profile_hint_first_name">Имя</string>
-    <string name="day_night_switch_descr">day/night switch</string>
-    <string name="avatar_descr">avatar</string>
-    <string name="edit_descr">edit</string>
+    <string name="day_night_switch">day/night switch</string>
+    <string name="avatar">avatar</string>
+    <string name="edit">edit</string>
 </resources>
