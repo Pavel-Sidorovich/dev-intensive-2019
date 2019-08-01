@@ -21,7 +21,7 @@ class CircleImageView @JvmOverloads constructor(
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     companion object {
-        private val DEFAULT_BORDER_WIDTH = 2//.dpToPixels
+        private const val DEFAULT_BORDER_WIDTH = 2//.dpToPixels
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
     }
 
@@ -31,17 +31,17 @@ class CircleImageView @JvmOverloads constructor(
     private var circleCenter: Int = 0
     private var heightCircle: Int = 0
 
-    private var borderWidth: Int = Utils.dpToPx(DEFAULT_BORDER_WIDTH, context)
+    private var borderWidth: Int = dpToPx(DEFAULT_BORDER_WIDTH, context)
     private var borderColor = DEFAULT_BORDER_COLOR
 
     private var civImage: Bitmap? = null
     private var civDrawable: Drawable? = null
 
-    fun getBorderWidth() = Utils.pxToDp(borderWidth, context)//.pxToDimensionPixels
+    fun getBorderWidth() = pxToDp(borderWidth, context)
 
     fun setBorderWidth(dp: Int) {
         if (dp == borderWidth) return
-        borderWidth = Utils.dpToPx(dp, context)
+        borderWidth = dpToPx(dp, context)
     }
 
     fun getBorderColor(): Int = borderColor
@@ -61,7 +61,7 @@ class CircleImageView @JvmOverloads constructor(
         if(attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyleAttr, 0)
 
-            borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, Utils.dpToPx(DEFAULT_BORDER_WIDTH, context))
+            borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, dpToPx(DEFAULT_BORDER_WIDTH, context))
             borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
 
             a.recycle()
@@ -192,6 +192,16 @@ class CircleImageView @JvmOverloads constructor(
             MeasureSpec.AT_MOST -> specSize
             else -> heightCircle
         }
+    }
+
+    fun dpToPx(dp: Int, context: Context): Int{
+        //return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.resources.displayMetrics).toInt()
+        return dp * resources.displayMetrics.density.toInt()
+    }
+
+    fun pxToDp(px: Int, context: Context): Int{
+//        return (px / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT))
+        return px / resources.displayMetrics.density.toInt()
     }
 }
 
