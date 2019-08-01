@@ -42,9 +42,6 @@
                     android:layout_width="@dimen/avatar_round_size"
                     android:layout_height="@dimen/avatar_round_size"
 
-                    android:src="@drawable/hugh"
-                    app:cv_borderWidth="4dp"
-
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/avatar"/>
 
