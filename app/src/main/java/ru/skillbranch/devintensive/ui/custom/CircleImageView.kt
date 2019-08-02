@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.ui.custom
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -9,6 +10,7 @@ import android.util.Log
 import android.widget.ImageView.ScaleType.CENTER_CROP
 import android.widget.ImageView.ScaleType.CENTER_INSIDE
 import androidx.annotation.ColorRes
+import androidx.annotation.Dimension
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import ru.skillbranch.devintensive.App
@@ -40,8 +42,8 @@ class CircleImageView @JvmOverloads constructor(
 
     fun getBorderWidth() = pxToDp(borderWidth)
 
-    fun setBorderWidth(dp: Int) {
-        if (dp == borderWidth) return
+    fun setBorderWidth(@Dimension(unit = Dimension.DP)dp: Int) {
+        if (dpToPx(dp) == borderWidth) return
         borderWidth = dpToPx(dp)
     }
 

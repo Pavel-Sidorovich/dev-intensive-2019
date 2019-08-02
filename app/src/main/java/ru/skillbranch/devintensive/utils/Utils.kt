@@ -139,14 +139,5 @@ object Utils {
      */
     fun verification(github: String) = Regex("((https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[\\w\\d-_]{1,39}/?$)|").find(github)?.value == github
 
-//    fun dpToPx(dp: Int, context: Context): Int{
-//        //return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.resources.displayMetrics).toInt()
-//        return dp * getResources().getDisplayMetrics().density
-//    }
-
-//    fun pxToDp(px: Int, context: Context): Int{
-////        return (px / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT))
-//        return px / getResources().getDisplayMetrics().density
-//    }
 }
 
