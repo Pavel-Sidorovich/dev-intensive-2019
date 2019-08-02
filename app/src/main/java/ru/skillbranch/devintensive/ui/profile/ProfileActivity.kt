@@ -219,6 +219,7 @@ class ProfileActivity : AppCompatActivity() {
         theme.resolveAttribute(R.attr.colorAccent, value, true)
         canvas.drawColor(value.data)
 
+        Log.d("M_ProfileActivity", "smth")
         // Рисуем текст
         mPaint.color = Color.WHITE
         mPaint.textSize = resources.getDimension(R.dimen.avatar_initials_48)

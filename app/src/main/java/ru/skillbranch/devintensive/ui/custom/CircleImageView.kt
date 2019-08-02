@@ -5,6 +5,7 @@ import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.ImageView.ScaleType.CENTER_CROP
 import android.widget.ImageView.ScaleType.CENTER_INSIDE
 import androidx.annotation.ColorRes
@@ -31,17 +32,17 @@ class CircleImageView @JvmOverloads constructor(
     private var circleCenter: Int = 0
     private var heightCircle: Int = 0
 
-    private var borderWidth: Int = dpToPx(DEFAULT_BORDER_WIDTH, context)
+    private var borderWidth: Int = dpToPx(DEFAULT_BORDER_WIDTH)
     private var borderColor = DEFAULT_BORDER_COLOR
 
     private var civImage: Bitmap? = null
     private var civDrawable: Drawable? = null
 
-    fun getBorderWidth() = pxToDp(borderWidth, context)
+    fun getBorderWidth() = pxToDp(borderWidth)
 
     fun setBorderWidth(dp: Int) {
         if (dp == borderWidth) return
-        borderWidth = dpToPx(dp, context)
+        borderWidth = dpToPx(dp)
     }
 
     fun getBorderColor(): Int = borderColor
@@ -61,7 +62,8 @@ class CircleImageView @JvmOverloads constructor(
         if(attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyleAttr, 0)
 
-            borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, dpToPx(DEFAULT_BORDER_WIDTH, context))
+            borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, dpToPx(DEFAULT_BORDER_WIDTH))
+            Log.d("M_CircleImageView", "$borderWidth")
             borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
 
             a.recycle()
@@ -90,6 +92,7 @@ class CircleImageView @JvmOverloads constructor(
         canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenterWithBorder - margeRadius, paintBorder)
         canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenter - margeRadius, paintBackground)
         canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenter - margeRadius, paint)
+
     }
 
     private fun update() {
@@ -194,14 +197,12 @@ class CircleImageView @JvmOverloads constructor(
         }
     }
 
-    fun dpToPx(dp: Int, context: Context): Int{
-        //return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.resources.displayMetrics).toInt()
-        return dp * resources.displayMetrics.density.toInt()
+    private fun dpToPx(dp: Int): Int{
+        return (dp * resources.displayMetrics.density + 0.5f).toInt()
     }
 
-    fun pxToDp(px: Int, context: Context): Int{
-//        return (px / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT))
-        return px / resources.displayMetrics.density.toInt()
+    private fun pxToDp(px: Int): Int{
+        return (px / resources.displayMetrics.density + 0.5f).toInt()
     }
 }
 
