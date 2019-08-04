@@ -113,10 +113,6 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
         et_repository.addTextChangedListener(textWatcher)
-//        if (et_repository.text.toString().trim() == ""){
-//            Log.d("M_ProfileActivity", "${et_repository.text}2")
-//            et_repository.setError(null, null)
-//        }
 
         btn_edit.setOnClickListener {
             if (isEditMode) saveProfileInfo()
@@ -164,10 +160,6 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun saveProfileInfo() {
-//        if (et_repository.text.toString().trim() == ""){
-//            Log.d("M_ProfileActivity", "${et_repository.text}3")
-//            et_repository.setError(null, null)
-//        }
 
         if (!Utils.verification(et_repository.text.toString())) {
 //            et_repository.setError(null, null)

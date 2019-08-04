@@ -1,7 +1,6 @@
 package ru.skillbranch.devintensive.ui.custom
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -15,7 +14,8 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
-import ru.skillbranch.devintensive.utils.Utils
+import ru.skillbranch.devintensive.extensions.dpToPx
+import ru.skillbranch.devintensive.extensions.pxToDp
 
 class CircleImageView @JvmOverloads constructor(
     context: Context,
@@ -34,17 +34,17 @@ class CircleImageView @JvmOverloads constructor(
     private var circleCenter: Int = 0
     private var heightCircle: Int = 0
 
-    private var borderWidth: Int = dpToPx(DEFAULT_BORDER_WIDTH)
+    private var borderWidth: Int = DEFAULT_BORDER_WIDTH.dpToPx(resources)//dpToPx(DEFAULT_BORDER_WIDTH)
     private var borderColor = DEFAULT_BORDER_COLOR
 
     private var civImage: Bitmap? = null
     private var civDrawable: Drawable? = null
 
-    fun getBorderWidth() = pxToDp(borderWidth)
+    fun getBorderWidth() = borderWidth.pxToDp(resources)//pxToDp(borderWidth)
 
     fun setBorderWidth(@Dimension(unit = Dimension.DP)dp: Int) {
-        if (dpToPx(dp) == borderWidth) return
-        borderWidth = dpToPx(dp)
+        if (dp.dpToPx(resources) == borderWidth) return
+        borderWidth = dp.dpToPx(resources)//dpToPx(dp)
     }
 
     fun getBorderColor(): Int = borderColor
@@ -64,7 +64,7 @@ class CircleImageView @JvmOverloads constructor(
         if(attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyleAttr, 0)
 
-            borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, dpToPx(DEFAULT_BORDER_WIDTH))
+            borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH.dpToPx(resources))//dpToPx(DEFAULT_BORDER_WIDTH))
             Log.d("M_CircleImageView", "$borderWidth")
             borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
 
@@ -199,13 +199,13 @@ class CircleImageView @JvmOverloads constructor(
         }
     }
 
-    private fun dpToPx(dp: Int): Int{
-        return (dp * resources.displayMetrics.density + 0.5f).toInt()
-    }
-
-    private fun pxToDp(px: Int): Int{
-        return (px / resources.displayMetrics.density + 0.5f).toInt()
-    }
+//    private fun dpToPx(dp: Int): Int{
+//        return (dp * resources.displayMetrics.density + 0.5f).toInt()
+//    }
+//
+//    private fun pxToDp(px: Int): Int{
+//        return (px / resources.displayMetrics.density + 0.5f).toInt()
+//    }
 }
 
 ///*
