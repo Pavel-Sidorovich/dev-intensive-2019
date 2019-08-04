@@ -50,9 +50,6 @@
                         android:layout_width="@dimen/avatar_round_size"
                         android:layout_height="@dimen/avatar_round_size"
 
-                        app:cv_borderWidth="6px"
-
-                        android:src="@drawable/hugh"
                         android:layout_centerHorizontal="true"
                         android:contentDescription="@string/avatar"/>
 
