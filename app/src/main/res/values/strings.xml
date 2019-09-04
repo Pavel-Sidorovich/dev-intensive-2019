@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chat Dev-intensive</string>
+    <string name="app_name">Dev-Intensive Chat</string>
     <string name="profile_label_rating">Рейтинг</string>
     <string name="profile_label_respect">Уважение</string>
     <string name="profile_hint_repository">Репозиторий</string>
@@ -9,4 +9,7 @@
     <string name="day_night_switch">day/night switch</string>
     <string name="avatar">avatar</string>
     <string name="edit">edit</string>
+    <string name="eye">Eye</string>
+    <string name="menu_search_title">Поиск</string>
+    <string name="create_group">Создание группы</string>
 </resources>

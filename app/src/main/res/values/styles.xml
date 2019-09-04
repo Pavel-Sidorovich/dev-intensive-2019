@@ -1,6 +1,14 @@
 <resources>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+    <style name="AppTheme.PopUpOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
+<style name="ActivityTransitions" parent="android:style/Animation.Activity">
+    <item name="android:activityOpenEnterAnimation">@anim/bottom_up</item>
+    <item name="android:activityOpenExitAnimation">@anim/idle</item>
+    <item name="android:activityCloseEnterAnimation">@anim/idle</item>
+    <item name="android:activityCloseExitAnimation">@anim/bottom_down</item>
+</style>
 
     <style name="Profile">
 
@@ -58,10 +66,5 @@
         <item name="android:minHeight">72dp</item>
     </style>
 
-    <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/ic_splash</item>
-        <!-- для Android 5+ вы можете поменять цвет colorPrimaryDark, чтобы соответствовать цвету windowBackground -->
-        <!--<item name="colorPrimaryDark">@android:color/white</item>-->
-    </style>
 
 </resources>

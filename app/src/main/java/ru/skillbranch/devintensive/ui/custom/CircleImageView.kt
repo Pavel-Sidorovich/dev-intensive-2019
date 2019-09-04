@@ -199,6 +199,8 @@ class CircleImageView @JvmOverloads constructor(
         }
     }
 
+
+
 //    private fun dpToPx(dp: Int): Int{
 //        return (dp * resources.displayMetrics.density + 0.5f).toInt()
 //    }
