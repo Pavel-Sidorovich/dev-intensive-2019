@@ -28,12 +28,12 @@ class MainViewModel : ViewModel() {
             val chats = chatItems.value//?.map { it.toChatItem() }
 
             result.value = if (queryStr.isEmpty()) {
-                chats//?.filter { !it.isArchived }
+                chats?.filter { !it.isArchived }
                     ?.map { it.toChatItem() }
                     ?.sortedBy { it.id.toInt() }
             } else {
                 chats
-//                    ?.filter { !it.isArchived }
+                    ?.filter { !it.isArchived }
 //                    ?.sortedBy { it.id.toInt() }
                     ?.filter {
                         for (member in it.members) {
