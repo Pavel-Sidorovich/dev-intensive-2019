@@ -10,16 +10,9 @@ class GroupViewModel : BaseThemeViewModel() {
     private val query = mutableLiveData("")
     private val groupRepository = GroupRepository
     private val userItems = mutableLiveData(loadUsers())
-//    private val appTheme = MutableLiveData<Int>()
     private val selectedItems = Transformations.map(userItems) { users ->
         users.filter { it.isSelected }
     }
-//    private val repository: PreferencesRepository = PreferencesRepository
-
-//    init {
-////        profileDate.value = repository.getProfile()
-//        appTheme.value = repository.getAppTheme()
-//    }
 
     fun getUsersData(): LiveData<List<UserItem>> {
         val result = MediatorLiveData<List<UserItem>>()
@@ -78,5 +71,4 @@ class GroupViewModel : BaseThemeViewModel() {
         groupRepository.createChat(selectedItems.value!!)
     }
 
-//    fun getTheme(): LiveData<Int> = appTheme
 }
