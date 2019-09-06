@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_primary">#2A1956</color>
+    <color name="color_primary_night">#272727</color>
+    <color name="color_bg">#FFFFFF</color>
+    <color name="color_bg_night">#1D1D1D</color>
     <color name="color_primary_dark">#1C0E42</color>
     <color name="color_primary_light">#473770</color>
     <color name="color_accent">#FC4C4C</color>
@@ -12,6 +15,7 @@
 
     <color name="color_divider_dark">#1F000000</color>
     <color name="color_divider_light">#1FFFFFFF</color>
-    <color name="color_indicator">#581F99</color>
+    <color name="color_counter">#581F99</color>
     <color name="color_green">#4FD149</color>
+    <color name="color_white">#FFFFFF</color>
 </resources>

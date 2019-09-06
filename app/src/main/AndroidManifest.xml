@@ -14,15 +14,18 @@
             android:theme="@style/AppTheme">
         <activity android:name=".ui.group.GroupActivity">
         </activity>
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.archive.ArchiveActivity">
+
+        </activity>
+        <activity android:name=".ui.main.MainActivity"
+                  android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.profile.ProfileActivity"
-                android:theme="@style/SplashTheme">
+                android:name=".ui.profile.ProfileActivity">
         </activity>
     </application>
 

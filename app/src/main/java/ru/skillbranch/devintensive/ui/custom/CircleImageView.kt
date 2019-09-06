@@ -16,6 +16,7 @@ import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.dpToPx
 import ru.skillbranch.devintensive.extensions.pxToDp
+import kotlin.math.min
 
 class CircleImageView @JvmOverloads constructor(
     context: Context,
@@ -24,7 +25,7 @@ class CircleImageView @JvmOverloads constructor(
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     companion object {
-        private const val DEFAULT_BORDER_WIDTH = 2//.dpToPixels
+        private const val DEFAULT_BORDER_WIDTH = 0//.dpToPixels
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
     }
 
@@ -65,7 +66,6 @@ class CircleImageView @JvmOverloads constructor(
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyleAttr, 0)
 
             borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH.dpToPx(resources))//dpToPx(DEFAULT_BORDER_WIDTH))
-            Log.d("M_CircleImageView", "$borderWidth")
             borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
 
             a.recycle()
@@ -104,7 +104,7 @@ class CircleImageView @JvmOverloads constructor(
         val usableWidth = width - (paddingLeft + paddingRight)
         val usableHeight = height - (paddingTop + paddingBottom)
 
-        heightCircle = Math.min(usableWidth, usableHeight)
+        heightCircle = min(usableWidth, usableHeight)
 
         circleCenter = ((heightCircle - borderWidth * 2) / 2)
         paintBorder.color = borderColor

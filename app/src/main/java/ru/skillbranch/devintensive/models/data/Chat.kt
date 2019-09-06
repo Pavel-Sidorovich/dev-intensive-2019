@@ -46,9 +46,9 @@ data class Chat(
         val lastMessage = messages.lastOrNull() ?: return "Сообщений еще нет" to ""
         if (lastMessage is TextMessage) {
             return if (lastMessage.text?.length ?: 0 > 128) {
-                lastMessage.text!!.substring(0, 127) to "${lastMessage.from.firstName}"
+                lastMessage.text!!.substring(0, 127) to (lastMessage.from.firstName ?: "")
             } else {
-                lastMessage.text to "${lastMessage.from.firstName}"
+                lastMessage.text to (lastMessage.from.firstName ?: "")
             }
         }
         return "Сообщений еще нет" to ""
@@ -57,21 +57,22 @@ data class Chat(
     private fun isSingle(): Boolean = members.size == 1
 
     fun toChatItem(): ChatItem {
-        return if (isArchived) {
-            ChatItem(
-                id,
-                null,
-                "",
-                "Archive",
-                lastMessageShort().first,
-                unreadableMessageCount(),
-                "",
-                false,
-                ChatType.ARCHIVE,
-                lastMessageShort().second
-            )
-        } else
-            if (isSingle()) {
+
+//        if (isArchived) {
+//            ChatItem(
+//                id,
+//                null,
+//                "",
+//                "Archive",
+//                lastMessageShort().first,
+//                unreadableMessageCount(),
+//                "",
+//                false,
+//                ChatType.ARCHIVE,
+//                lastMessageShort().second
+//            )
+//        } else
+        return if (isSingle()) {
             val user = members.first()
             ChatItem(
                 id,
@@ -84,17 +85,19 @@ data class Chat(
                 user.isOnline
             )
         } else {
+            val user = members.first()
             ChatItem(
                 id,
                 null,
-                "",
+                Utils.toInitials(user.firstName, user.lastName) ?: "??",
                 title,
                 lastMessageShort().first,
                 unreadableMessageCount(),
                 lastMessageDate()?.shortFormat() ?: "",
                 false,
                 ChatType.GROUP,
-                lastMessageShort().second
+                lastMessageShort().second,
+                messages.isEmpty()
             )
         }
     }

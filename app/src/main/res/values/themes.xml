@@ -11,13 +11,19 @@
         <item name="colorAccentedSurface">@color/color_primary_light</item>
         <item name="colorIcon">@color/color_gray</item>
         <item name="colorDivider">@color/color_divider_dark</item>
+        <item name="colorBackground">@color/color_bg</item>
+        <item name="colorCounter">@color/color_counter</item>
+        <item name="colorIndicator">@color/color_green</item>
+        <item name="colorSnackBar">@color/color_primary</item>
+        <item name="colorSelected">@color/color_gray_light</item>
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>
         
     </style>
 
-<style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+<!--<style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+<style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
     <item name="android:windowBackground">@drawable/ic_splash</item>
 </style>
 

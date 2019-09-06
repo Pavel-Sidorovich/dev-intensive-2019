@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.item_chat_single.tv_message_single
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
+import ru.skillbranch.devintensive.utils.Utils.getColorFromAttr
 
 class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAdapter.ChatItemViewHolder>() {
     companion object {
@@ -38,7 +39,7 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
         return when(viewType) {
             SINGLE_TYPE -> SingleViewHolder(inflater.inflate(R.layout.item_chat_single, parent, false))
             GROUP_TYPE -> GroupViewHolder(inflater.inflate(R.layout.item_chat_group, parent, false))
-            else -> SingleViewHolder(inflater.inflate(R.layout.item_chat_single, parent, false))
+            else -> ArchiveViewHolder(inflater.inflate(R.layout.item_chat_archive, parent, false))
         }
     }
 
@@ -76,11 +77,11 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
 
     inner class SingleViewHolder(convertView: View) : ChatItemViewHolder(convertView), ItemTouchViewHolder {
         override fun onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY)
+            itemView.setBackgroundColor(getColorFromAttr(R.attr.colorSelected, itemView.context.theme))
         }
 
         override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
+            itemView.setBackgroundColor(getColorFromAttr(R.attr.colorBackground, itemView.context.theme))
         }
 
         override fun bind(item: ChatItem, listener : (ChatItem) -> Unit) {
@@ -96,7 +97,7 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
                     .into(iv_avatar_single)
             }
 
-            sv_indicator.visibility = if(item.isOnline) View.VISIBLE else View.GONE
+            sv_indicator_single.visibility = if(item.isOnline) View.VISIBLE else View.GONE
 
             with(tv_date_single){
                 visibility = if(item.lastMessageDate != null) View.VISIBLE else View.GONE
@@ -119,11 +120,11 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
 
     inner class GroupViewHolder(convertView: View) : ChatItemViewHolder(convertView), ItemTouchViewHolder {
         override fun onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY)
+            itemView.setBackgroundColor(getColorFromAttr(R.attr.colorSelected, itemView.context.theme))
         }
 
         override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
+            itemView.setBackgroundColor(getColorFromAttr(R.attr.colorBackground, itemView.context.theme))
         }
 
         override fun bind(item: ChatItem, listener : (ChatItem) -> Unit) {
@@ -142,7 +143,7 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
             tv_title_group.text = item.title
             tv_message_group.text = item.shortDescription
             with(tv_message_author){
-                visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
+                visibility = if(!item.isEmpty) View.VISIBLE else View.GONE
                 text = item.author
             }
             itemView.setOnClickListener{
@@ -153,16 +154,61 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
     }
 
     inner class ArchiveViewHolder(convertView: View) : ChatItemViewHolder(convertView), ItemTouchViewHolder {
+//        override fun onItemSelected() {
+//            itemView.setBackgroundColor(Color.LTGRAY)
+//        }
+//
+//        override fun onItemCleared() {
+//            itemView.setBackgroundColor(Color.WHITE)
+//        }
+//
+//        override fun bind(item: ChatItem, listener : (ChatItem) -> Unit) {
+//            iv_avatar_archive.setImageBitmap(drawInitials(item.initials, iv_avatar_archive.context))
+////            iv_avatar_archive.setImageResource(R.drawable.ic_unarchive_black_12dp)
+//
+//            with(tv_counter_archive){
+//                visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
+//                text = item.messageCount.toString()
+//            }
+//
+//            tv_title_archive.text = item.title
+//            tv_message_archive.text = item.shortDescription
+//            with(tv_message_archive){
+//                visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
+//                text = item.author
+//            }
+//            itemView.setOnClickListener{
+//                listener.invoke(item)
+//            }
+//        }
+
         override fun onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY)
+            itemView.setBackgroundColor(getColorFromAttr(R.attr.colorSelected, itemView.context.theme))
         }
 
         override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
+            itemView.setBackgroundColor(getColorFromAttr(R.attr.colorBackground, itemView.context.theme))
         }
 
         override fun bind(item: ChatItem, listener : (ChatItem) -> Unit) {
-            iv_avatar_archive.setImageResource(R.drawable.ic_unarchive_black_24dp)
+            if(item.avatar == null){
+                Glide.with(itemView)
+                    .clear(iv_avatar_archive)
+//            iv_avatar_single.setInitials(item.initials) TODO Кидать в цирклИмаге буквы
+//                iv_avatar_single.setImageDrawable(drawInitials(item.initials))
+                iv_avatar_archive.setImageBitmap(drawInitials(item.initials, iv_avatar_archive.context))
+            } else {
+                Glide.with(itemView)
+                    .load(item.avatar)
+                    .into(iv_avatar_archive)
+            }
+
+            sv_indicator_archive.visibility = if(item.isOnline) View.VISIBLE else View.GONE
+
+            with(tv_date_archive){
+                visibility = if(item.lastMessageDate != null) View.VISIBLE else View.GONE
+                text = item.lastMessageDate
+            }
 
             with(tv_counter_archive){
                 visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
@@ -171,10 +217,6 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
 
             tv_title_archive.text = item.title
             tv_message_archive.text = item.shortDescription
-            with(tv_message_archive){
-                visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
-                text = item.author
-            }
             itemView.setOnClickListener{
                 listener.invoke(item)
             }
@@ -197,8 +239,6 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
         val value = TypedValue()
         myContext.theme.resolveAttribute(R.attr.colorAccent, value, true)
         canvas.drawColor(value.data)
-
-        Log.d("M_ProfileActivity", "smth")
         // Рисуем текст
         mPaint.color = Color.WHITE
         mPaint.textSize = myContext.resources.getDimension(R.dimen.avatar_initials_20)

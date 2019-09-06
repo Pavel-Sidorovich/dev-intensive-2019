@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/spacing_normal_16"
-            app:srcCompat="@drawable/ic_arrow_forward_black_24dp"
+            app:srcCompat="@drawable/ic_arrow_forward_white_24dp"
             android:visibility="invisible"
             android:scaleX="0"
             android:scaleY="0"

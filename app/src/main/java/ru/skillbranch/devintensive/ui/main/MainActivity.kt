@@ -1,11 +1,14 @@
 package ru.skillbranch.devintensive.ui.main
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,11 +18,12 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
-import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
-import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import ru.skillbranch.devintensive.ui.adapters.ChatTouchHelperCallback
+import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
+import ru.skillbranch.devintensive.ui.group.GroupActivity
+import ru.skillbranch.devintensive.utils.Utils.getColorFromAttr
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +32,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+//        setTheme(viewModel.getTheme().value!!)
+        Log.d("M_MainActivity", "onCreate")
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initToolbar()
@@ -66,19 +74,26 @@ class MainActivity : AppCompatActivity() {
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
 
 
-        val tauchCallback = ChatItemTouchHelperCallback(chatAdapter) {
-            viewModel.addToArchive(it.id)
+        val touchCallback = ChatTouchHelperCallback(chatAdapter) {
             val id = it.id
-            Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
+            viewModel.addToArchive(id)
+            val snackBar = Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
                 .setAction(
                     "Отмена"
                 ) {
                     viewModel.restoreFromArchive(id)
                 }
-                .show()
+
+            val sbView = snackBar.view
+            sbView.setBackgroundResource(R.drawable.snackbar)
+
+            val textView = sbView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+            textView.setTextColor(getColorFromAttr(R.attr.colorBackground, theme))
+
+            snackBar.show()
         }
 
-        val touchHelper = ItemTouchHelper(tauchCallback)
+        val touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(rv_chat_list)
 
         with(rv_chat_list) {
@@ -88,15 +103,32 @@ class MainActivity : AppCompatActivity() {
         }
 
         fab.setOnClickListener {
-            //        viewModel.addItems()
             val intent = Intent(this, GroupActivity::class.java)
             startActivity(intent)
+//            viewModel.switchTheme()
         }
     }
 
+//    private fun getColorFromAttr(
+//        @AttrRes attrColor: Int,
+//        typedValue: TypedValue = TypedValue(),
+//        resolveRefs: Boolean = true
+//    ): Int {
+//        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+//        return typedValue.data
+//    }
+
 
     private fun initViewModel() {
+        Log.d("M_MainActivity", "initModel")
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
+        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
     }
+
+    private fun updateTheme(mode: Int) {
+        Log.d("M_MainActivity", "updateTheme $mode")
+        delegate.setLocalNightMode(mode)
+    }
+
 }

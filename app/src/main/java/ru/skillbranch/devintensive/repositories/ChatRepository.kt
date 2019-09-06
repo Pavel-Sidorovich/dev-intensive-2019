@@ -14,6 +14,10 @@ object ChatRepository {
         return chats
     }
 
+    fun addToFirdt(chat: Chat) {
+        return chats.value!!.toMutableList().add(0, chat)
+    }
+
     fun update(chat: Chat) {
         val copy = chats.value!!.toMutableList()
         val ind = chats.value!!.indexOfFirst { it.id == chat.id }

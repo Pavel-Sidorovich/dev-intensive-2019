@@ -368,6 +368,7 @@ object DataGenerator {
 
     private fun generateStabChats(count: Int): List<Chat> {
         val list = mutableListOf<Chat>()
+
         for (user in stabUsers) {
             val singleChat = Chat(
                 "${list.size}",
@@ -377,6 +378,7 @@ object DataGenerator {
             singleChat.messages = generateRandomMessages(singleChat, listOf(user))
             list.add(singleChat)
         }
+
         for (i in 0 until count) {
             val members = stabUsers.randomSublist(5, 2)
             Log.e("DataGenerator", "$members")
@@ -388,6 +390,7 @@ object DataGenerator {
             groupChat.messages = generateRandomMessages(groupChat, members)
             list.add(groupChat)
         }
+        
         return list
     }
 

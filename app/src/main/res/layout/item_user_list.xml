@@ -3,7 +3,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent" android:layout_height="@dimen/item_size"
                 android:padding="@dimen/spacing_normal_16"
-                android:background="@android:color/white">
+                android:background="?attr/colorBackground">
 
     <ImageView
             android:id="@+id/iv_selected"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             tools:text="User name"
             android:textSize="14sp"
-            android:textColor="@color/color_primary"
+            android:textColor="?attr/colorSnackBar"
             android:fontFamily="sans-serif-medium"
             android:layout_toEndOf="@id/iv_avatar_user"
             android:layout_marginStart="@dimen/spacing_normal_16"/>

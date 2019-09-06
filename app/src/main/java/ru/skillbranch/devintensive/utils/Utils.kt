@@ -1,8 +1,10 @@
 package ru.skillbranch.devintensive.utils
 
 import android.content.Context
+import android.content.res.Resources
 import android.util.TypedValue
 import android.util.DisplayMetrics
+import androidx.annotation.AttrRes
 
 
 /**
@@ -139,5 +141,17 @@ object Utils {
      */
     fun verification(github: String) = Regex("((https://|www.|https://www.)?github.com/(?!enterprise$|features$|topics$|collections$|trending$|events$|marketplace$|pricing$|nonprofit$|customer-stories$|security$|login$|join$)[\\w\\d-_]{1,39}/?$)|").find(github)?.value == github
 
+    /**
+     * Преобразует Attr формат в Color
+     */
+    public fun getColorFromAttr(
+        @AttrRes attrColor: Int,
+        theme : Resources.Theme,
+        typedValue: TypedValue = TypedValue(),
+        resolveRefs: Boolean = true
+    ): Int {
+        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+        return typedValue.data
+    }
 }
 

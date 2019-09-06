@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -26,6 +27,10 @@ class GroupActivity : AppCompatActivity() {
     private lateinit var viewModel: GroupViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+
+        Log.d("M_GroupActivity", "onCreate")
+
         super.onCreate(savedInstanceState)
         setTitle(R.string.create_group)
         setContentView(R.layout.activity_group)
@@ -59,7 +64,7 @@ class GroupActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if(item?.itemId == android.R.id.home) {
+        return if(item.itemId == android.R.id.home) {
             finish()
             overridePendingTransition(R.anim.idle, R.anim.bottom_down)
             true
@@ -91,6 +96,7 @@ class GroupActivity : AppCompatActivity() {
             updateChips(it)
             toggleFab(it.size > 1)
         })
+        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
     }
 
     private fun toggleFab(isShow: Boolean) {
@@ -134,6 +140,10 @@ class GroupActivity : AppCompatActivity() {
         }
 
         users.forEach { (_, v) -> addChipToGroup(v) }
+    }
+
+    private fun updateTheme(mode: Int) {
+        delegate.setLocalNightMode(mode)
     }
 
 }

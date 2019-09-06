@@ -1,20 +1,25 @@
 package ru.skillbranch.devintensive.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.repositories.GroupRepository
+import ru.skillbranch.devintensive.repositories.PreferencesRepository
 
-class GroupViewModel : ViewModel() {
+class GroupViewModel : BaseThemeViewModel() {
     private val query = mutableLiveData("")
     private val groupRepository = GroupRepository
     private val userItems = mutableLiveData(loadUsers())
+//    private val appTheme = MutableLiveData<Int>()
     private val selectedItems = Transformations.map(userItems) { users ->
         users.filter { it.isSelected }
     }
+//    private val repository: PreferencesRepository = PreferencesRepository
+
+//    init {
+////        profileDate.value = repository.getProfile()
+//        appTheme.value = repository.getAppTheme()
+//    }
 
     fun getUsersData(): LiveData<List<UserItem>> {
         val result = MediatorLiveData<List<UserItem>>()
@@ -72,4 +77,6 @@ class GroupViewModel : ViewModel() {
     fun handleCreateGroup() {
         groupRepository.createChat(selectedItems.value!!)
     }
+
+//    fun getTheme(): LiveData<Int> = appTheme
 }

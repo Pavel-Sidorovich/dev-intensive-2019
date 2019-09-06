@@ -2,18 +2,15 @@ package ru.skillbranch.devintensive.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import ru.skillbranch.devintensive.extensions.mutableLiveData
-import ru.skillbranch.devintensive.models.data.Chat
 import ru.skillbranch.devintensive.models.data.ChatItem
-import ru.skillbranch.devintensive.repositories.ChatRepository
-import ru.skillbranch.devintensive.utils.DataGenerator
 
-class MainViewModel : ViewModel() {
-    private val query = mutableLiveData("")
-    private val chatRepository = ChatRepository
-    private val chatItems = chatRepository.loadChats()
+class MainViewModel : BaseViewModel() {
+//    private val query = mutableLiveData("")
+//    private val chatRepository = ChatRepository
+//    private val chatItems = chatRepository.loadChats()
+//
+//    private var archivedCount = 0
+
 //    private val chats = Transformations.map(chatItems){chats ->
 //        return@map chats.filter { !it.isArchived }
 //            .map { it.toChatItem() }
@@ -23,18 +20,20 @@ class MainViewModel : ViewModel() {
     fun getChatData(): LiveData<List<ChatItem>> {
         val result = MediatorLiveData<List<ChatItem>>()
 
+
         val filterF = {
             val queryStr = query.value!!
             val chats = chatItems.value//?.map { it.toChatItem() }
 
             result.value = if (queryStr.isEmpty()) {
-                chats?.filter { !it.isArchived }
+                chats
+                    ?.filter { !it.isArchived}
                     ?.map { it.toChatItem() }
                     ?.sortedBy { it.id.toInt() }
             } else {
                 chats
                     ?.filter { !it.isArchived }
-//                    ?.sortedBy { it.id.toInt() }
+                    ?.sortedBy { it.id.toInt() }
                     ?.filter {
                         for (member in it.members) {
                             if (member.firstName?.contains(queryStr, true) == true
@@ -70,19 +69,21 @@ class MainViewModel : ViewModel() {
 //        chats.value = copy.sortedBy { it.id.toInt() }
 //    }
 
-    fun addToArchive(chatId: String) {
-        val chat = chatRepository.find(chatId)
-        chat ?: return
-        chatRepository.update(chat.copy(isArchived = true))
-    }
-
-    fun restoreFromArchive(chatId: String) {
-        val chat = chatRepository.find(chatId)
-        chat ?: return
-        chatRepository.update(chat.copy(isArchived = false))
-    }
-
-    fun handleSearchQuery(text: String?) {
-        query.value = text
-    }
+//    fun addToArchive(chatId: String) {
+//        val chat = chatRepository.find(chatId)
+//        chat ?: return
+//        archivedCount ++
+//        chatRepository.update(chat.copy(isArchived = true))
+//    }
+//
+//    fun restoreFromArchive(chatId: String) {
+//        val chat = chatRepository.find(chatId)
+//        chat ?: return
+//        archivedCount --
+//        chatRepository.update(chat.copy(isArchived = false))
+//    }
+//
+//    fun handleSearchQuery(text: String?) {
+//        query.value = text
+//    }
 }

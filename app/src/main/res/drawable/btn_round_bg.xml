@@ -8,7 +8,7 @@
     </item>
     <item android:id="@android:id/background">
         <shape android:shape="oval">
-            <solid android:color="?attr/colorBackgroundFloating"/>
+            <solid android:color="?attr/colorBackground"/>
         </shape>
     </item>
 </ripple>

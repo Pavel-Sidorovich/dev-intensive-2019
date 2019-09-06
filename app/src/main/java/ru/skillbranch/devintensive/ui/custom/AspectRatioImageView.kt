@@ -3,13 +3,14 @@ package ru.skillbranch.devintensive.ui.custom
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import ru.skillbranch.devintensive.R
 
 class AspectRatioImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     deffStyleAttr: Int = 0
-): ImageView(context, attrs, deffStyleAttr) {
+): AppCompatImageView(context, attrs, deffStyleAttr) {
     companion object{
         private const val DEFAULT_ASPECT_RATIO = 1.78f
     }
