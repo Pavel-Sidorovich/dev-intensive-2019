@@ -31,7 +31,7 @@ class ArchiveActivity : AppCompatActivity() {
         Log.d("M_ArchiveActivity", "onCreate")
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_archive)
         title = "Архив чатов"
         initToolbar()
         initViews()
@@ -109,25 +109,14 @@ class ArchiveActivity : AppCompatActivity() {
         }
 
         fab.setOnClickListener {
-//            val intent = Intent(this, GroupActivity::class.java)
-//            startActivity(intent)
             viewModel.switchTheme()
         }
     }
 
-//    private fun getColorFromAttr(
-//        @AttrRes attrColor: Int,
-//        typedValue: TypedValue = TypedValue(),
-//        resolveRefs: Boolean = true
-//    ): Int {
-//        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
-//        return typedValue.data
-//    }
-
     private fun initViewModel() {
         Log.d("M_ArchiveActivity", "initModel")
         viewModel = ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
-        viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
+        viewModel.getArchiveChat().observe(this, Observer { chatAdapter.updateData(it) })
         viewModel.getTheme().observe(this, Observer { updateTheme(it) })
     }
 

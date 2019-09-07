@@ -20,6 +20,7 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 import androidx.appcompat.widget.SearchView
+import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.ui.adapters.ChatTouchHelperCallback
 import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
 import ru.skillbranch.devintensive.ui.group.GroupActivity
@@ -69,7 +70,12 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
 
         chatAdapter = ChatAdapter {
-            Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).show()
+            if (it.chatType == ChatType.ARCHIVE){
+                val intent = Intent(this, ArchiveActivity::class.java)
+                startActivity(intent)
+            } else {
+                Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).show()
+            }
         }
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
 
@@ -105,19 +111,8 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             val intent = Intent(this, GroupActivity::class.java)
             startActivity(intent)
-//            viewModel.switchTheme()
         }
     }
-
-//    private fun getColorFromAttr(
-//        @AttrRes attrColor: Int,
-//        typedValue: TypedValue = TypedValue(),
-//        resolveRefs: Boolean = true
-//    ): Int {
-//        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
-//        return typedValue.data
-//    }
-
 
     private fun initViewModel() {
         Log.d("M_MainActivity", "initModel")

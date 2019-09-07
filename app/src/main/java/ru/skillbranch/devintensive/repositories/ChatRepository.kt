@@ -14,7 +14,7 @@ object ChatRepository {
         return chats
     }
 
-    fun addToFirdt(chat: Chat) {
+    fun addToFirst(chat: Chat) {
         return chats.value!!.toMutableList().add(0, chat)
     }
 

@@ -40,11 +40,11 @@ class ProfileActivity : AppCompatActivity() {
         initViews(savedInstanceState)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        if (outState != null) {
+    override fun onSaveInstanceState(outState: Bundle) {
+//        if (outState != null) {
             super.onSaveInstanceState(outState)
             outState.putBoolean(IS_EDIT_MODE, isEditMode)
-        }
+//        }
     }
 
     private fun initViewModel() {
@@ -54,7 +54,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun updateTheme(mode: Int) {
-        delegate.setLocalNightMode(mode)
+        delegate.localNightMode = mode
     }
 
     private fun updateUI(profile: Profile) {

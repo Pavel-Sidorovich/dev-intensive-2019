@@ -24,5 +24,6 @@
     <attr name="colorCounter" format="reference"/>
     <attr name="colorBackground" format="reference"/>
     <attr name="colorSelected" format="reference"/>
+    <attr name="colorArchive" format="reference"/>
 
 </resources>

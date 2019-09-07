@@ -16,6 +16,7 @@
         <item name="colorIndicator">@color/color_green</item>
         <item name="colorSnackBar">@color/color_primary</item>
         <item name="colorSelected">@color/color_gray_light</item>
+        <item name="colorArchive">@color/color_gray</item>
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>

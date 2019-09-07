@@ -16,6 +16,7 @@
         <item name="colorIndicator">@color/color_accent_night</item>
         <item name="colorSnackBar">@color/color_white</item>
         <item name="colorSelected">@color/color_primary_night</item>
+        <item name="colorArchive">@color/color_gray_dark</item>
 
     </style>
 </resources>
