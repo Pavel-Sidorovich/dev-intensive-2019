@@ -9,6 +9,7 @@ import android.util.TypedValue
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -34,8 +35,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+//
         setTheme(R.style.AppTheme)
-//        setTheme(viewModel.getTheme().value!!)
+//        delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+
         Log.d("M_MainActivity", "onCreate")
 
         super.onCreate(savedInstanceState)
@@ -119,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("M_MainActivity", "initModel")
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
-        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+//        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
     }
 
     private fun updateTheme(mode: Int) {

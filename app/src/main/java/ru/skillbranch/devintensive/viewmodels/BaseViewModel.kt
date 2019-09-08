@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.viewmodels
 
+import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.models.data.Chat
 import ru.skillbranch.devintensive.repositories.ChatRepository

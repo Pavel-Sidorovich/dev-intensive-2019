@@ -34,10 +34,10 @@ class GroupActivity : AppCompatActivity() {
     private lateinit var viewModel: GroupViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+//        setTheme(R.style.AppTheme)
 
         Log.d("M_GroupActivity", "onCreate")
-
+        theme
         super.onCreate(savedInstanceState)
         setTitle(R.string.create_group)
         setContentView(R.layout.activity_group)
@@ -104,7 +104,7 @@ class GroupActivity : AppCompatActivity() {
             updateChips(it)
             toggleFab(it.size > 1)
         })
-        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+//        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
     }
 
     private fun toggleFab(isShow: Boolean) {

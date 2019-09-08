@@ -14,7 +14,7 @@ open class BaseThemeViewModel : ViewModel() {
 
 
     init {
-        appTheme.value = repository.getAppTheme()
+//        appTheme.value = repository.getAppTheme()
     }
 
     fun switchTheme() {
@@ -23,7 +23,7 @@ open class BaseThemeViewModel : ViewModel() {
         } else {
             appTheme.value = AppCompatDelegate.MODE_NIGHT_YES
         }
-        repository.saveAppTheme(appTheme.value!!)
+//        repository.saveAppTheme(appTheme.value!!)
     }
 
     fun getTheme(): LiveData<Int> = appTheme

@@ -27,7 +27,7 @@ class ArchiveActivity : AppCompatActivity() {
     private lateinit var viewModel: ArchiveViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+//        setTheme(R.style.AppTheme)
 
         Log.d("M_ArchiveActivity", "onCreate")
 
@@ -118,7 +118,7 @@ class ArchiveActivity : AppCompatActivity() {
         Log.d("M_ArchiveActivity", "initModel")
         viewModel = ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
         viewModel.getArchiveChat().observe(this, Observer { chatAdapter.updateData(it) })
-        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+//        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
     }
 
     private fun updateTheme(mode: Int) {
