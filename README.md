@@ -1,94 +1,108 @@
-# Android Architecture Components. Сохранение состояния Application
-<img src="https://user-images.githubusercontent.com/10943612/61995784-9a7cda00-b095-11e9-99cd-7863fa235313.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/62415394-cb2eb780-b631-11e9-985d-3a2e31c54789.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/62415395-cb2eb780-b631-11e9-80cd-2b30181239de.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/62415396-cb2eb780-b631-11e9-93cb-e9e06ff9b28d.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/62415397-cbc74e00-b631-11e9-807e-c1b9c456e8a6.png" width="18%"></img> 
+# Material Design, RecyclerView. Работа со списками
 
-## Верстка ProfileActivity
-Необходимо реализовать верстку экрана согласно макетам с использованием стилей (любым удобным для тебя способом (LinearLayout/RelativeLayout/ConstraintLayout)
+<img src="https://user-images.githubusercontent.com/10943612/64490375-ef9b3680-d264-11e9-8d4c-4c343afb97eb.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/64490389-06418d80-d265-11e9-8046-a055095874b1.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/64490391-148fa980-d265-11e9-88b6-3b2fb026976c.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/64490400-24a78900-d265-11e9-8461-4a7fc5d393e3.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/64490408-2ec98780-d265-11e9-91f2-56a567cb9aca.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/64490410-312be180-d265-11e9-8c1f-e7dc157664f8.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/64490411-3426d200-d265-11e9-8f87-bc3bde7bf853.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/64490420-43a61b00-d265-11e9-97a0-46328bd3ce92.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/64490422-44d74800-d265-11e9-9a66-443af254e71f.png" width="18%"></img> <img src="https://user-images.githubusercontent.com/10943612/64490424-46a10b80-d265-11e9-8bf3-fc31f9d47ad1.png" width="18%"></img> 
 
-```bash
-Сверстай экран профиля пользователя, он должен содержать в себе следующие View:
-Кнопка переключения в режим редактирования (ImageButton) @+id/btn_edit
-Кнопка переключения режима Day/Night (ImageButton) @+id/btn_switch_theme
-Аватар пользователя (ImageView/CircleImageView) @+id/iv_avatar
-Псевдоним (TextView) @+id/tv_nick_name
-Ранг (TextView) @+id/tv_rank
-Рейтинг (TextView) @+id/tv_rating
-Уважение (TextView) @+id/tv_respect
-Имя (EditText) @+id/et_first_name
-Фамилия (EditText) @+id/et_last_name
-О себе (EditText) @+id/et_about
-Обертка над "О себе" (TextInputLayout) @+id/wr_about
-Репозиторий (EditText) @+id/et_repository
-Обертка над "Репозиторий" (TextInputLayout) @+id/wr_repository
+## Реализация методов Chat 
+Необходимо реализовать бизнес логику методов класса Chat: unreadableMessageCount(), lastMessageDate(), lastMessageShort() 
+```bush
+Реализуй следующие методы класса Chat
+unreadableMessageCount(): Int - должен возвращать количество непрочитанных сообщений в чате
+lastMessageDate(): Date? - должен вeрнуть дату последнего сообщения, если таковое имеется, иначе null
+lastMessageShort(): Pair - должен вернуть пару значений. Первое - строка с текстом сообщения (если сообщение
+TextMessage), строка "user.firstName - отправил фото" (если сообщение ImageMessage). Второе значение - имя 
+автора сообщения
 ```
-
-## Редактирование профиля
-Реализуй бизнес логику режима редактирования профиля пользователя и сохранение измененных данных в SharedPreferences, режим редактирования должен сохраняться при перевороте экрана
-
-```bash
-Необходимо реализовать сохранение введенных данных пользователя (данные сохраняются при нажатии пользователем
-кнопки сохранения данных (в EDIT_MODE @id/btn_edit)) с применением ViewModel и PreferencesRepository. Введенные
-данные должны быть сохранены в SharedPreferences. Режим редактирования должен сохраняться при перевороте экрана
+## Создание MainActivity 
+Необходимо реализовать верстку экрана согласно макетам с использованием стилей (любым удобным для тебя способом (LinearLayout/RelativeLayout/ConstraintLayout) 
+```bush
+Сверстай экран чатов, он должен содержать в себе следующие View: 
+AppBarLayout и тулбар (Toolbar) @+id/toolbar
+Список чатов (RecyclerView) @+id/rv_chat_list
+Кнопка создания новой группы (FloatActionButton) @+id/fab
+MainActivity должна реализовывать следующий функционал: Добавление пользователя в архив свайпом влево на элементе
+списка (после добавления в архив заархивированный элемент не должен отображаться в списке) 
 ```
-
-## Переключение режима Day/Night
-Необходимо реализовать логику переключения между режимами Day/Night и сохранение активного режима в SharedPreferences
-```bash
-Реализуй переключение между режимами Day/Night при клике на кнопку @id/btn_switch_theme и установи дефолтное
-значение режима из PreferencesRepository (сохраненное в SharedPreferences) в методе onCreate() класса App.
-Атрибуты тем приложения colorAccentedSurface, сolorIcon, colorDivider
+## Отмена архивирования чата 
+Необходимо реализовать бизнес логику отмены архивирования сообщения с применением Snackbar Action 
+```bush
+Реализуй отмену архивирования чата, добавив Action к Snackbar`у в обработчике свайпа
 ```
-## *CircleImageView
-Необходимо реализовать CustomView для скругления установленного Drawable
-```bash
-Реализуй CustomView с названием класса CircleImageView и кастомными xml атрибутами cv_borderColor (цвет границы
-(format="color") по умолчанию white) и cv_borderWidth (ширина границы (format="dimension") по умолчанию 2dp).
-CircleImageView должна превращать установленное изображение в круглое изображение с цветной рамкой, у
-CircleImageView должны быть реализованы методы @Dimension getBorderWidth():Int, setBorderWidth(@Dimension dp:Int),
-getBorderColor():Int, setBorderColor(hex:String), setBorderColor(@ColorRes colorId: Int). Используй
-CircleImageView как ImageView для аватара пользователя (@id/iv_avatar)
+## Создание GroupActivity 
+Необходимо реализовать верстку экрана согласно макетам с использованием стилей любым удобным для тебя способом (LinearLayout/RelativeLayout/ConstraintLayout). 
+```bush
+Сверстай экран добавления пользователей, он должен содержать в себе следующие View: 
+AppBarLayout и тулбар (Toolbar) @+id/toolbar
+Список выбранных пользователей (ChipGroup)@+id/chip_group
+Список пользователей (RecyclerView) @+id/rv_user_list
+Кнопка добавления новой группы (FloatActionButton) @+id/fab
+GroupActivity должно реализовывать следующий функционал: Выбор пользователей в rv_user_list и добавление 
+выбранных пользователей в ChipGroup (chip_group). При клике на элемент списка должна стать видна иконка 
+(iv_selected.visibility=View.VISIBLE) и выбранный пользователь должен добавляться в ChipGroup. При клике
+на иконку удаления Chip пользователь должен удаляться из ChipGroup и соответственно из списка выбранных 
+пользователей (iv_selected.visability=View.GONE) 
 ```
-## *SplashTheme
-Необходимо реализовать тему, отображаемую при загрузке приложения до момента создания Activity
-```bash
-Реализуй SplashTheme в соответствии с макетами (@style/SplahTheme). Необходимо реализовать ее отображение при
-запуске приложения до момента создания Activity. Как только Activity будет создана, необходимо установить AppTheme
+## Поиск по RecyclerView GroupActivity 
+Необходимо реализовать бизнес логику поиска пользователя по RecyclerView c применением SearchView 
+```bush
+Реализуй поиск по имени пользователя в списке, необходимо исспользовать menu_search с идентификатором 
+элемента поиска R.id.action_search. При реализации необходимо использовать MediatorLiveData.
+Ожидаемое поведение: при вводе в строку поиска символов на экран выводятся пользователи, чье полное имя
+содержит введенный набор символов (с игнорированием регистра). При очистке поля ввода поискового запроса
+отображаются все пользователи. Должно сохраняться состояние выбранных пользователей вне зависимости от 
+поискового запроса (т.е. если пользователь был выбран, он должен быть в chip_group и должен быть отмечен
+соответствующей иконкой в списке; если пользователь не соответствует параметрам поиска, но выбран, то он
+должен отображаться в chip_group, но не должен отображаться в списке) 
 ```
-## *firstName + lastName = nickName
-Необходимо реализовать преобразование firstName и lastName пользователя в его nickName
-```bash
-Реализуй Profile.nickName как вычисляемое свойство из имени и фамилии пользователя, возвращающее значение
-псевдонима пользователя в виде транслитерированной строки с заменой пробела на "_"
-Пример:
-Profile: firsName = "Женя", lastName = "Стереотипов"; Profile.nickName //Zhenya_Stereotipov
-(Используй реализованный ранее метод Utils.transliteration)
+## Создание группы и добавление в список чатов 
+Необходимо реализовать бизнес логику создания группы из выбранных пользователей и добавления созданной группы в список чатов 
+```bush
+Реализуй создание чата из группы выбранных пользователей и добавление чата в список чатов. Идентификатор
+нового чата должен задаваться как инкремент от последнего идентификатора в списке чатов, заголовок чата
+должен состоять из конкатенированных имен участников чата, разделенных ", " 
+Пример members = "{firstName:"Joe"},{firstName:"Mary"}" title = "Joe, Mary" 
 ```
-## *Text Input Layout error
-Необходимо реализовать вадидацию вводимых пользователем данных в поле @id/et_repository на соответствие url валидному github аккаунту
-```bash
-Реализуй валидацию вводимых пользователем данных в поле @id/et_repository на соответствие url валидному github
-аккаунту, вводимое значение может быть пустой строкой или должно содержать домен github.com (https://, www,
-https://www) и аккаунт пользователя (пути для исключения прикреплены в ресурсах урока). Если URL невалиден,
-выводить сообщение "Невалидный адрес репозитория" в TextInputLayout (wr_repository.error(message)) и запрещать
-сохранение невалидного значения в SharedPreferences (при попытке сохранить невалидное поле очищать et_repository
-при нажатии @id/btn_edit)
-Пример:
-https://github.com/johnDoe //валиден
-https://www.github.com/johnDoe //валиден
-www.github.com/johnDoe //валиден
-github.com/johnDoe //валиден
-https://anyDomain.github.com/johnDoe //невалиден
-https://github.com/ //невалиден
-https://github.com //невалиден
-https://github.com/johnDoe/tree //невалиден
-https://github.com/johnDoe/tree/something //невалиден
-https://github.com/enterprise //невалиден
-https://github.com/pricing //невалиден
-https://github.com/join //невалиден
+## *Поиск по RecyclerView MainActivity 
+Необходимо реализовать бизнес логику поиска чата по RecyclerView c применением SearchView 
+```bush
+Реализуй поиск по имени пользователей в списке, необходимо исспользовать menu_search с идентификатором 
+элемента поиска R.id.action_search
+Ожидаемое повдение: при вводе в строку поиска символов на экран выводятся чаты чьи заголовки содержат 
+введенный набор символов (с игнорированием регистра).При очистке поля ввода поискового запроса 
+отображаются все чаты.
 ```
-## **Преобразование Инициалов в Drawable
-Необходимо реализовать программное преобразование инициалов пользователя в Drawable с цветным фоном и буквами
-```bash
-Реализуй программное преобразование инициалов пользователя (если доступны - заполнено хотя бы одно поле) в
-Drawable с фоном colorAccent (c учетом темы) и буквами инициалов (colorWhite) и установи полученное изображение
-как изображение по умолчанию для профиля пользователя
+## *Создание элемента списка "Архив чатов" 
+Необходимо реализовать верстку элемента списка согласно макетам 
+```bush
+Сверстай элемента списка, он должен содержать в себе следующие View: 
+Иконку элемента (статический drawable)
+Заголовок (статический текст "Архив чатов")
+Имя автора последнего сообщения@+id/tv_message_author_archive
+Текст последнего сообщения@+id/tv_message_archive
+Дата последнего сообщения@+id/tv_date_archive
+Количество непрочитанных сообщений@+id/tv_counter_archive
+ArchiveItem должен реализовывать следующий функционал : При имеющихся архтвных чатах первый элемент 
+списка rv_chat_list (MainActivity) должен являться item_chat_archive, количество сообщений в нем 
+tv_archive_counter должно быть равно сумме непрочитанных сообщений архивных чатов. Отображаемое 
+сообщение tv_message_archive и его автор tv_message_author_archive должны соответствовать самому
+последнему входящему сообщению в архивных чатах. При клике на ArchiveItem (item_chat_archive) должно
+открываеться ArchiveActivity. Не отображать ArchiveItem (item_chat_archive) если нет зархивированных
+чатов. Свайп на ArchiveItem не должен срабатывать 
+```
+## *Создание ArchiveActivity 
+Необходимо реализовать верстку экрана согласно макетам с использованием стилей (любым удобным для тебя способом (LinearLayout/RelativeLayout/ConstraintLayout) 
+```bush
+Сверстай экран архивов чатов, он должен содержать в себе следующие View: 
+AppBarLayout и тулбар (Toolbar) @+id/toolbar
+Список архивных чатов (RecyclerView) @+id/rv_archive_list
+ArchiveActivity должно реализовывать следующий функционал : Восстановление чата из архива выполняется
+свайпом влево на элементе списка (после восстановления из архива восстановленный чат не должен 
+отображаться в списке архивных чатов rv_archive_list, но должен отображаться в списке активных чатов
+rv_chat_list) 
+```
+## *Реализация Night UI 
+Необходимо реализовать верстку ночного режима для MainActivity, GroupActivity, ArchiveActivity согласно макетам 
+```bush
+Реализуй верстку ночного режима для MainActivity, GroupActivity, ArchiveActivity руководствуясь
+макетами дизайна прикрепленными к уроку. Для удобства рекомендуется установить ночную тему глобально
+в App, но не забыть отключить перед сдачей на проверку
 ```
