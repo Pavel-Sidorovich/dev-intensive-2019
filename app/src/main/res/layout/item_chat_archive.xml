@@ -57,7 +57,7 @@
             android:textSize="10sp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:textColor="@color/color_gray_dark"
+            android:textColor="?attr/colorTextMessage"
             tools:text="18:00"/>
 
     <TextView
