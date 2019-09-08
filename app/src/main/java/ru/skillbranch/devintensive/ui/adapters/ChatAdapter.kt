@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.Log
@@ -95,7 +96,7 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
                     .into(iv_avatar_single)
             }
 
-            sv_indicator_single.visibility = if(item.isOnline) View.VISIBLE else View.GONE
+            sv_indicator.visibility = if(item.isOnline) View.VISIBLE else View.GONE
 
             with(tv_date_single){
                 visibility = if(item.lastMessageDate != null) View.VISIBLE else View.GONE
@@ -141,7 +142,7 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
             tv_message_group.text = item.shortDescription
             with(tv_message_author){
                 visibility = if(!item.isEmpty) View.VISIBLE else View.GONE
-                text = item.author
+                text = "@${item.author}"
             }
             itemView.setOnClickListener{
                 listener.invoke(item)
@@ -162,7 +163,7 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
                 visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
                 text = item.messageCount.toString()
             }
-            tv_message_author_archive.text = item.author
+            tv_message_author_archive.text = "@${item.author}"
             tv_title_archive.text = item.title
             tv_message_archive.text = item.shortDescription
             itemView.setOnClickListener{

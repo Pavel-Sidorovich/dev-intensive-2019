@@ -14,7 +14,7 @@
             android:layout_alignParentStart="true"/>
 
     <View
-            android:id="@+id/sv_indicator_single"
+            android:id="@+id/sv_indicator"
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:background="@drawable/bg_indicator"
