@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_archive.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.ui.adapters.ArchiveTouchHelperCallback
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
+import ru.skillbranch.devintensive.ui.custom.MyDividerItemDecorator
 import ru.skillbranch.devintensive.utils.Utils.getColorFromAttr
 import ru.skillbranch.devintensive.viewmodels.ArchiveViewModel
 
@@ -77,7 +78,7 @@ class ArchiveActivity : AppCompatActivity() {
         chatAdapter = ChatAdapter {
             Snackbar.make(rv_archive_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).show()
         }
-        val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val divider = MyDividerItemDecorator(resources.getDrawable(R.drawable.divider, theme))//DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
 
 
         val touchCallback = ArchiveTouchHelperCallback(chatAdapter) {
@@ -91,7 +92,7 @@ class ArchiveActivity : AppCompatActivity() {
                 }
 
             val sbView = snackBar.view
-            sbView.setBackgroundColor(getColorFromAttr(R.attr.colorSnackBar, theme))
+            sbView.setBackgroundResource(R.drawable.snackbar)
 
             val textView = sbView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
             textView.setTextColor(getColorFromAttr(R.attr.colorBackground, theme))

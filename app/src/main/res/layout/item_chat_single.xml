@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Sbbb"
-            android:textColor="@color/color_gray_dark"
+            android:textColor="?attr/colorTextMessage"
             android:textSize="14sp"
             android:layout_toEndOf="@id/iv_avatar_single"
             android:layout_toStartOf="@id/tv_counter_single"

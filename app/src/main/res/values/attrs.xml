@@ -25,5 +25,10 @@
     <attr name="colorBackground" format="reference"/>
     <attr name="colorSelected" format="reference"/>
     <attr name="colorArchive" format="reference"/>
+    <attr name="colorBgChip" format="reference"/>
+    <attr name="colorCloseChip" format="reference"/>
+    <attr name="colorAllBg" format="reference"/>
+    <attr name="colorTextMessage" format="reference"/>
+    <attr name="colorDone" format="reference"/>
 
 </resources>

@@ -1,24 +1,31 @@
 package ru.skillbranch.devintensive.ui.group
 
+import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
+import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_group.*
+import kotlinx.android.synthetic.main.activity_group.view.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.ui.adapters.UserAdapter
+import ru.skillbranch.devintensive.ui.custom.MyDividerItemDecorator
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.GroupViewModel
 
 class GroupActivity : AppCompatActivity() {
@@ -75,7 +82,8 @@ class GroupActivity : AppCompatActivity() {
 
     private fun initViews() {
         usersAdapter = UserAdapter { viewModel.handleSelectedItem(it.id) }
-        val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val divider = MyDividerItemDecorator(resources.getDrawable(R.drawable.divider, theme))//DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+
         with(rv_user_list) {
             adapter = usersAdapter
             layoutManager = LinearLayoutManager(this@GroupActivity)
@@ -111,11 +119,24 @@ class GroupActivity : AppCompatActivity() {
         val chip = Chip(this).apply {
             text = user.fullName
             chipIcon = resources.getDrawable(R.drawable.avatar_default, theme)
+
+//            if(user.avatar == null){
+////                Glide.with(chip_group)
+////                    .clear(chipIcon)
+//                chipIcon = drawInitials("jj", this.context).toDrawable(resources)
+////                chipIcon.draw(drawInitials("jjl", this.context))
+////                iv_avatar_single.setImageBitmap(drawInitials(user.initials, chipIcon.context))
+//            } else {
+//                Glide.with(context)
+//                    .load(user.avatar)
+//                    .into(this.)
+//            }
+
             isCloseIconVisible = true
             tag = user.id
             isClickable = true
-            closeIconTint = ColorStateList.valueOf(Color.WHITE)
-            chipBackgroundColor = ColorStateList.valueOf(getColor(R.color.color_primary_light))
+            closeIconTint = ColorStateList.valueOf(Utils.getColorFromAttr(R.attr.colorCloseChip, theme))
+            chipBackgroundColor = ColorStateList.valueOf(Utils.getColorFromAttr(R.attr.colorBgChip, theme))
             setTextColor(Color.WHITE)
         }
         chip.setOnCloseIconClickListener { viewModel.handleRemoveChip(it.tag.toString()) }
@@ -146,4 +167,37 @@ class GroupActivity : AppCompatActivity() {
         delegate.setLocalNightMode(mode)
     }
 
+    private fun drawInitials(text : String, myContext : Context) : Bitmap {
+        val size = myContext.resources.getDimension(R.dimen.avatar_item_size).toInt()
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val mPaint = Paint()
+        val mTextBoundRect = Rect()
+
+
+        val centerX = size / 2
+        val centerY = size / 2
+
+        val value = TypedValue()
+        myContext.theme.resolveAttribute(R.attr.colorAccent, value, true)
+        canvas.drawColor(value.data)
+        // Рисуем текст
+        mPaint.color = Color.WHITE
+        mPaint.textSize = myContext.resources.getDimension(R.dimen.avatar_initials_20)
+
+        // Подсчитаем размер текста
+        mPaint.getTextBounds(text, 0, text.length, mTextBoundRect)
+        // Используем measureText для измерения ширины
+        val mTextWidth = mPaint.measureText(text)
+        val mTextHeight = mTextBoundRect.height()
+
+        canvas.drawText(
+            text,
+            centerX - (mTextWidth / 2f),
+            centerY + (mTextHeight / 2f),
+            mPaint
+        )
+
+        return bitmap
+    }
 }

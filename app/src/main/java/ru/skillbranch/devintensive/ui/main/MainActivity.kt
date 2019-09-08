@@ -23,6 +23,7 @@ import androidx.appcompat.widget.SearchView
 import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.ui.adapters.ChatTouchHelperCallback
 import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
+import ru.skillbranch.devintensive.ui.custom.MyDividerItemDecorator
 import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.utils.Utils.getColorFromAttr
 
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).show()
             }
         }
-        val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val divider = MyDividerItemDecorator(resources.getDrawable(R.drawable.divider, theme))//DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
 
 
         val touchCallback = ChatTouchHelperCallback(chatAdapter) {

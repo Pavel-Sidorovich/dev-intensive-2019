@@ -14,7 +14,6 @@ open class BaseThemeViewModel : ViewModel() {
 
 
     init {
-//        profileDate.value = repository.getProfile()
         appTheme.value = repository.getAppTheme()
     }
 

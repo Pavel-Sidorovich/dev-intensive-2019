@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Sbbb"
-            android:textColor="@color/color_gray_dark"
+            android:textColor="?attr/colorTextMessage"
             android:textSize="14sp"
             android:layout_toEndOf="@id/tv_message_author"
             android:layout_toStartOf="@id/tv_counter_group"

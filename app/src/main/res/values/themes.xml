@@ -17,6 +17,12 @@
         <item name="colorSnackBar">@color/color_primary</item>
         <item name="colorSelected">@color/color_gray_light</item>
         <item name="colorArchive">@color/color_gray</item>
+        <item name="colorBgChip">@color/color_primary_light</item>
+        <item name="colorCloseChip">@color/color_bg</item>
+        <item name="colorAllBg">@color/color_all_bg_light</item>
+        <item name="colorTextMessage">@color/color_gray_dark</item>
+        <item name="colorDone">@color/color_primary</item>
+
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>

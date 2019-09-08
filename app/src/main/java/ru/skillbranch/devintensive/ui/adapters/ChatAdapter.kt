@@ -152,17 +152,6 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
     inner class ArchiveViewHolder(convertView: View) : ChatItemViewHolder(convertView) {
 
         override fun bind(item: ChatItem, listener : (ChatItem) -> Unit) {
-//            if(item.avatar == null){
-//                Glide.with(itemView)
-//                    .clear(iv_avatar_archive)
-//                iv_avatar_archive.setImageBitmap(drawInitials(item.initials, iv_avatar_archive.context))
-//            } else {
-//                Glide.with(itemView)
-//                    .load(item.avatar)
-//                    .into(iv_avatar_archive)
-//            }
-
-//            sv_indicator_archive.visibility = if(item.isOnline) View.VISIBLE else View.GONE
 
             with(tv_date_archive){
                 visibility = if(item.lastMessageDate != null) View.VISIBLE else View.GONE

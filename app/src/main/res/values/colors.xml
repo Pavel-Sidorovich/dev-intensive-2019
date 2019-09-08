@@ -13,9 +13,12 @@
     <color name="color_gray_dark">#675F7F</color>
     <color name="color_gray_light">#ECECEC</color>
 
-    <color name="color_divider_dark">#1F000000</color>
-    <color name="color_divider_light">#1FFFFFFF</color>
+    <color name="color_divider_dark">#12000000</color>
+    <color name="color_divider_light">#12FFFFFF</color>
     <color name="color_counter">#581F99</color>
     <color name="color_green">#4FD149</color>
     <color name="color_white">#FFFFFF</color>
+
+    <color name="color_all_bg_light">#FAFAFA</color>
+    <color name="color_all_bg_dark">#121212</color>
 </resources>
