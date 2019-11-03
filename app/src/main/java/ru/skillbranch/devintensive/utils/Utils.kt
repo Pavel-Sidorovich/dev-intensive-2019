@@ -2,9 +2,13 @@ package ru.skillbranch.devintensive.utils
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Color
 import android.util.TypedValue
 import android.util.DisplayMetrics
 import androidx.annotation.AttrRes
+import java.util.*
+import java.util.Arrays.asList
+import kotlin.math.abs
 
 
 /**
@@ -152,6 +156,19 @@ object Utils {
     ): Int {
         theme.resolveAttribute(attrColor, typedValue, resolveRefs)
         return typedValue.data
+    }
+
+    fun getColorRandom(key: String): Int{
+        val colors = ArrayList<Int>()
+        colors.addAll(listOf(
+            -0xbbcca, -0x16e19d, -0x63d850, -0x98c549,
+            -0xc0ae4b, -0xde690d, -0xfc560c, -0xff432c,
+            -0xff6978, -0xb350b0, -0x743cb6, -0x3223c7,
+            -0x14c5, -0x3ef9, -0x6800, -0xa8de,
+            -0x86aab8, -0x616162, -0x9f8275, -0xcccccd
+        ))
+        val whichColor = abs(key.hashCode()) % colors.size
+        return colors[whichColor]
     }
 }
 

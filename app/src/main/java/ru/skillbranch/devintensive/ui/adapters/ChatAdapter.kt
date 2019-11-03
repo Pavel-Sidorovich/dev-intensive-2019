@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.item_chat_single.tv_message_single
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.utils.Utils.getColorFromAttr
 
 class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAdapter.ChatItemViewHolder>() {
@@ -183,9 +184,11 @@ class ChatAdapter(val listener: (ChatItem)-> Unit) : RecyclerView.Adapter<ChatAd
         val centerX = size / 2
         val centerY = size / 2
 
-        val value = TypedValue()
-        myContext.theme.resolveAttribute(R.attr.colorAccent, value, true)
-        canvas.drawColor(value.data)
+//        val value = TypedValue()
+//        myContext.theme.resolveAttribute(R.attr.colorAccent, value, true)
+//        canvas.drawColor(value.data)
+
+        canvas.drawColor(Utils.getColorRandom(text))
         // Рисуем текст
         mPaint.color = Color.WHITE
         mPaint.textSize = myContext.resources.getDimension(R.dimen.avatar_initials_20)

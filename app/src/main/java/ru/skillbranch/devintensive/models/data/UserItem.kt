@@ -6,6 +6,7 @@ data class UserItem (
     val fullName: String,
     val initials : String?,
     val avatar: String?,
+
     var lastActivity: String,
     var isSelected : Boolean = false,
     var isOnline: Boolean = false

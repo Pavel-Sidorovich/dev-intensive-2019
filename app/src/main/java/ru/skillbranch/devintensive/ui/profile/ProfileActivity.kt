@@ -207,9 +207,11 @@ class ProfileActivity : AppCompatActivity() {
         val centerX = width / 2
         val centerY = height / 2
 
-        val value = TypedValue()
-        theme.resolveAttribute(R.attr.colorAccent, value, true)
-        canvas.drawColor(value.data)
+//        val value = TypedValue()
+//        theme.resolveAttribute(R.attr.colorAccent, value, true)
+//        canvas.drawColor(value.data)
+
+        canvas.drawColor(Utils.getColorRandom(text))
 
         Log.d("M_ProfileActivity", "smth")
         // Рисуем текст

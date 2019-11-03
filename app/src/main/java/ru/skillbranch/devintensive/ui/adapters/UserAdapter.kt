@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.item_user_list.*
 import kotlinx.android.synthetic.main.item_user_list.sv_indicator
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.UserItem
+import ru.skillbranch.devintensive.utils.Utils
 
 class UserAdapter(val listener: (UserItem) -> Unit) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     var items: List<UserItem> = listOf()
@@ -86,9 +87,11 @@ class UserAdapter(val listener: (UserItem) -> Unit) : RecyclerView.Adapter<UserA
         val centerX = size / 2 //width / 2
         val centerY = size / 2 //height / 2
 
-        val value = TypedValue()
-        myContext.theme.resolveAttribute(R.attr.colorAccent, value, true)
-        canvas.drawColor(value.data)
+//        val value = TypedValue()
+//        myContext.theme.resolveAttribute(R.attr.colorAccent, value, true)
+//        canvas.drawColor(value.data)
+
+        canvas.drawColor(Utils.getColorRandom(text))
 
         Log.d("M_ProfileActivity", "smth")
         // Рисуем текст
